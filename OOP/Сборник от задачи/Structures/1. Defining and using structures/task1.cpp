@@ -8,15 +8,14 @@ struct Product
     double cost;
 };
 
-
-int main()
+void task1(void)
 {
- //a
+//a
     Product p1 = {"screw-driver", 456, 5.50};
     Product p2 = {"hammer", 324, 8.20};
 //b
-    std::cout<<p1.description << " - "<<p1.partNum << " - "<<p1.cost<<std::endl;
-    std::cout<<p2.description <<" - "<<p2.partNum <<" - "<<p2.cost <<std::endl;
+    std::cout << p1.description << " - " << p1.partNum << " - " << p1.cost << std::endl;
+    std::cout << p2.description <<" - " << p2.partNum <<" - " << p2.cost << std::endl;
 //c    
     Product prods[10];
 //d
@@ -31,9 +30,13 @@ int main()
 //f
     for (size_t i = 0; i < 5; i++)
     {
-        std::cout<<prod[i].description<<" - "<<prod[i].partNum<<" - "<<prod[i].cost<<std::endl;
+        std::cout << prod[i].description << " - " << prod[i].partNum<<" - " << prod[i].cost << std::endl;
     }
-    
+}
+
+int main(void)
+{
+    task1();
     
     return 0;
 }
