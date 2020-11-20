@@ -1,2 +1,2 @@
-Object - oriented programming
-Data structures and algorithms
+Object - oriented programming in C++
+Data structures and algorithms in C
