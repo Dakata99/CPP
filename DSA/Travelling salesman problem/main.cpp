@@ -111,6 +111,24 @@ void read_v2(std::ifstream& file, std::vector<std::vector<int>>& cities)
     } 
 }
 
+void symmetry(std::vector<std::vector<int>>& cities)
+{
+    for (size_t i = 0; i < cities.size() - 1; i++)  
+        if ( (cities[i].size() != cities[i + 1].size()) || (cities.size() != cities[i].size()) ) 
+            throw "Not a symmetric matrix!\n";
+    
+    for (size_t i = 0; i < cities.size(); i++)
+    {
+        for (size_t j = 0; j < cities.size(); j++)
+        {
+            if(i == j && cities[i][j] != 0) cities[i][j] = 0;
+            else if(i != j && cities[i][j] == 0 && cities[j][i] != 0) cities[i][j] = cities[j][i];
+            else if(i != j && cities[j][i] == 0 && cities[i][j] != 0) cities[j][i] = cities[i][j];
+            else if(i != j && cities[i][j] == 0 && cities[j][i] == 0) cities[i][j] = cities[j][i] = std::rand() % 100 + 1;
+        }
+    }
+}
+
 /* Time complexity : O((n - 1)!), where n is the number of cities */
 void A_star_alg(const std::vector<std::vector<int>>& cities, const size_t start, std::queue<size_t>& path, int& total_path)
 {
@@ -225,7 +243,7 @@ void test_A_star(std::vector<std::vector<int>> cities, size_t start)
     print_info(start, path, total_path, duration);    
 }
 
-void test_greeady(std::vector<std::vector<int>> cities, size_t start)
+void test_greedy(std::vector<std::vector<int>> cities, size_t start)
 {
 /* check how long it taks for the algorithm to find a solution */
     auto start_time = std::chrono::high_resolution_clock::now(); 
@@ -246,11 +264,12 @@ void run(void)
     std::vector<std::vector<int>> cities;
     read(cities); /* read from file and store data in cities */
     if(cities.empty()) return; /* exit if no data is added */
+    symmetry(cities); /* if the matrix in the file is incorrect => correct it */
 
     size_t start = std::rand() % (cities.size() - 1) + 0; /* starting from a random city */
     
     test_A_star(cities, start); /* testing A* algorithm */
-    test_greeady(cities, start); /* testing Greedy algorithm */
+    test_greedy(cities, start); /* testing Greedy algorithm */
 }
 
 void run_v2(const char *file_name)
@@ -261,17 +280,18 @@ void run_v2(const char *file_name)
     std::vector<std::vector<int>> cities;
     read_v2(file, cities);
     if(cities.empty()) return; /* exit if no data is added */
+    symmetry(cities); /* if the matrix in the file is incorrect => correct it */
 
     size_t start = std::rand() % (cities.size() - 1) + 0; /* starting from a random city */
     test_A_star(cities, start); /* testing A* algorithm */
-    test_greeady(cities, start); /* testing Greedy algorithm */
+    test_greedy(cities, start); /* testing Greedy algorithm */
 }
 
 int main(int argc, char *argv[])
 {
     /* generate_random_matrix(); */
-    //run();
-    for(int i = 1; i < argc; i++) run_v2(argv[i]);
+    run();
+    //for(int i = 1; i < argc; i++) run_v2(argv[i]);
     
     return 0;
 }
