@@ -9,7 +9,7 @@
 #include <string>
 #include <cstring>
 
-void generate_random_matrix()
+void generate_random_matrix(void)
 {
 /* 
 generating a random matrix, which represents the cities and the distances between them
@@ -29,7 +29,11 @@ and storing it in a file
     std::cout << "Enter number of cities: ";
     std::cin >> cities;
 
-    size_t lower_bound = 1, upper_bound = 50;
+    int lower_bound = 1, upper_bound = 50;
+/*    
+    std::cout << "Enter lower bound of distances: "; std::cin >> lower_bound;
+    std::cout << "Enter upper bound of distances: "; std::cin >> upper_bound;
+*/
     for (size_t i = 0; i < cities; i++)
     {
         for (size_t j = 0; j < cities; j++)
@@ -85,22 +89,35 @@ void read(std::vector<std::vector<int>>& cities)
     }        
 }
 
-void random_A_star_alg()
+void read_v2(std::ifstream& file, std::vector<std::vector<int>>& cities)
 {
-    
+    std::string line;
+    while (std::getline(file, line)) /* getting the file line by line */
+    {
+        std::vector<int> distances; /* this vector contains the distances from one city to other*/
+
+        char *cstr = new char [line.length() + 1]; /* taking char* from string */
+        std::strcpy (cstr, line.c_str());  /* taking char* from string */
+
+        char *number = std::strtok(cstr, ",");  /* tokenizing the string */
+        while (number != 0)
+        {
+            distances.push_back(std::stoi(number));
+            number = std::strtok(NULL, ",");
+        }
+
+        delete[]cstr;
+        cities.push_back(distances); /* pushing the each line of elements */
+    } 
 }
 
-/* 
-    Time complexity : O((n - 1)!), where n is the number of cities 
-    Space complexity : O()
-*/
+/* Time complexity : O((n - 1)!), where n is the number of cities */
 void A_star_alg(const std::vector<std::vector<int>>& cities, const size_t start, std::queue<size_t>& path, int& total_path)
 {
 /* storing all cities(vertices) apart from starting one(vertex) */
     std::vector<int> vertex;
     for (int i = 0; i < cities.size(); i++)
-        if (i != start)
-            vertex.push_back(i);
+        if (i != start) vertex.push_back(i);
 
     int min_path = INT_MAX; /* store minimum weight Hamiltonian cycle */
     do 
@@ -134,18 +151,14 @@ void A_star_alg(const std::vector<std::vector<int>>& cities, const size_t start,
     total_path = min_path; /* minimal total path */
 }
 
-/* 
-    Time complexity : O((n - 1)!), where n is the number of cities 
-    Space complexity : O()
-*/
+/* Time complexity : O(n), where n is the number of cities */
 void greedy_alg(const std::vector<std::vector<int>>& cities, const size_t start, std::queue<size_t>& path, int& total_path)
 {
     std::set<size_t> vertex; /* a set of cities for checking if its visited or not */
 
 /* storing all cities(vertices) apart from starting one(vertex) */
     for (size_t i = 0; i < cities.size(); i++)
-        if(i != start)
-            vertex.insert(i);
+        if(i != start) vertex.insert(i);
 
     size_t curr_index = start; /* representing the current city with curr_index */
 
@@ -181,15 +194,27 @@ void greedy_alg(const std::vector<std::vector<int>>& cities, const size_t start,
     total_path = curr_path; /* total path updated */
 }
 
-void test_A_star(std::vector<std::vector<int>> cities)
+void print_info(const size_t start, std::queue<size_t>& path, const int& total_path, std::chrono::nanoseconds duration)
 {
-/* check how long it taks for the algorithm to find a solution */
+    size_t cities = path.size() - 1;
+    printf("Starting city: %ld\nPath: ", start);
+    while (!path.empty()) /* print the path */
+    {
+        std::cout << path.front(); 
+        if(path.size() > 1) 
+            std::cout << " -> ";
+        path.pop();
+    }
+    printf("\nMinimum path: %d\n", total_path);
+    std::cout << "Total time for " << cities << " cities: " << duration.count() << " nanoseconds\n\n";
+}
+
+void test_A_star(std::vector<std::vector<int>> cities, size_t start)
+{
+/* check how long it takes for the algorithm to find a solution */
     auto start_time = std::chrono::high_resolution_clock::now(); 
 
     std::cout << "\n---------- A* algorithm ----------\n";
-
-/* starting from a random city and finding all the minimum ways */
-    size_t start = std::rand() % (cities.size() - 1) + 0;
 
 /*
 return the minimum path and store the actual path in a queue, named path 
@@ -199,31 +224,17 @@ and the sum of all distances in variable total_path
     int total_path;
     A_star_alg(cities, start, path, total_path);
 
-    std::cout << "Starting city: " << start << "\nPath: ";
-    while (!path.empty()) /* print the path */
-    {
-        std::cout << path.front();
-        if(path.size() > 1) 
-            std::cout << " -> ";
-        path.pop();
-    }
-    std::cout << "\nMinimum path: " << total_path << std::endl; /* printf minimum path */
-
     auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time); 
-    std::cout << "Total time for " << cities.size() << " cities: " << duration.count() << std::endl;
-    std::cout << std::endl;
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time); 
+    print_info(start, path, total_path, duration);    
 }
 
-void test_greeady(std::vector<std::vector<int>> cities)
+void test_greeady(std::vector<std::vector<int>> cities, size_t start)
 {
 /* check how long it taks for the algorithm to find a solution */
     auto start_time = std::chrono::high_resolution_clock::now(); 
 
     std::cout << "---------- Greedy algorithm ----------\n";
-
-/* starting from a random city and finding all the minimum ways */
-    size_t start = std::rand() % (cities.size() - 1) + 0;
 
 /*
 return the minimum path and store the actual path in a queue, named path 
@@ -233,46 +244,42 @@ and the sum of all distances in variable total_path
     int total_path;
     greedy_alg(cities, start, path, total_path);
 
-    std::cout << "Starting city: " << start << "\nPath: ";
-    while (!path.empty()) /* print the path */
-    {
-        std::cout << path.front(); 
-        if(path.size() > 1) 
-            std::cout << " -> ";
-        path.pop();
-    }
-    std::cout << "\nMinimum path: " << total_path << std::endl;
-
     auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time); 
-    std::cout << "Total time for " << cities.size() << " cities: " << duration.count() << std::endl;
-    std::cout << std::endl;
+    auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time); 
+    print_info(start, path, total_path, duration);
 }
 
-void run()
+void run(void)
 {
     std::vector<std::vector<int>> cities;
     read(cities); /* read from file and store data in cities */
     if(cities.empty()) return; /* exit if no data is added */
 
-    test_A_star(cities); /* testing A* algorithm */
-    test_greeady(cities); /* testing Greedy algorithm */
+    size_t start = std::rand() % (cities.size() - 1) + 0; /* starting from a random city */
+    
+    test_A_star(cities, start); /* testing A* algorithm */
+    test_greeady(cities, start); /* testing Greedy algorithm */
 }
 
-int main()
+void run_v2(const char *file_name)
+{
+    std::ifstream file(file_name);
+    if (!file.is_open()) throw "No such file!\n";
+
+    std::vector<std::vector<int>> cities;
+    read_v2(file, cities);
+    if(cities.empty()) return; /* exit if no data is added */
+
+    size_t start = std::rand() % (cities.size() - 1) + 0; /* starting from a random city */
+    test_A_star(cities, start); /* testing A* algorithm */
+    test_greeady(cities, start); /* testing Greedy algorithm */
+}
+
+int main(int argc, char *argv[])
 {
     /* generate_random_matrix(); */
-    run();
+    //run();
+    for(int i = 1; i < argc; i++) run_v2(argv[i]);
     
     return 0;
-}
-
-int find_minimum(std::vector<int> distances, size_t start)
-{
-    int result = 0;
-    for (size_t i = 0; i < distances.size() - 1; i++)
-        if (i != start && distances[i] != 0 && distances[i] != 0 && distances[i] <= distances[i + 1])
-            result = distances[i];
-    
-    return result;
 }
