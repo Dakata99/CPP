@@ -74,7 +74,7 @@ void read(std::vector<std::vector<int>>& cities)
     {
         std::vector<int> distances; /* this vector contains the distances from one city to other*/
 
-        char *cstr = new char [line.length() + 1]; /* taking char* from string */
+        char *cstr = new char [line.length() + 1];
         std::strcpy (cstr, line.c_str());  /* taking char* from string */
 
         char *number = std::strtok(cstr, ",");  /* tokenizing the string */
@@ -85,7 +85,7 @@ void read(std::vector<std::vector<int>>& cities)
         }
 
         delete[]cstr;
-        cities.push_back(distances); /* pushing the each line of elements */
+        cities.push_back(distances); /* pushing each line of elements */
     }        
 }
 
@@ -96,7 +96,7 @@ void read_v2(std::ifstream& file, std::vector<std::vector<int>>& cities)
     {
         std::vector<int> distances; /* this vector contains the distances from one city to other*/
 
-        char *cstr = new char [line.length() + 1]; /* taking char* from string */
+        char *cstr = new char [line.length() + 1];
         std::strcpy (cstr, line.c_str());  /* taking char* from string */
 
         char *number = std::strtok(cstr, ",");  /* tokenizing the string */
@@ -107,7 +107,7 @@ void read_v2(std::ifstream& file, std::vector<std::vector<int>>& cities)
         }
 
         delete[]cstr;
-        cities.push_back(distances); /* pushing the each line of elements */
+        cities.push_back(distances); /* pushing each line of elements */
     } 
 }
 
@@ -124,7 +124,7 @@ void A_star_alg(const std::vector<std::vector<int>>& cities, const size_t start,
     {
         std::queue<size_t> curr_path; /* stores the cities, representint the path in a graphical way */
         
-        int current_path_weight = 0; /*  store current Path weight(cost) */
+        int current_path_weight = 0; /*  store current path weight */
  
         /* calculate current path weight */
         size_t current = start; 
@@ -151,7 +151,7 @@ void A_star_alg(const std::vector<std::vector<int>>& cities, const size_t start,
     total_path = min_path; /* minimal total path */
 }
 
-/* Time complexity : O(n), where n is the number of cities */
+/* Time complexity : O(n*n), where n is the number of cities */
 void greedy_alg(const std::vector<std::vector<int>>& cities, const size_t start, std::queue<size_t>& path, int& total_path)
 {
     std::set<size_t> vertex; /* a set of cities for checking if its visited or not */
@@ -216,10 +216,6 @@ void test_A_star(std::vector<std::vector<int>> cities, size_t start)
 
     std::cout << "\n---------- A* algorithm ----------\n";
 
-/*
-return the minimum path and store the actual path in a queue, named path 
-and the sum of all distances in variable total_path
-*/
     std::queue<size_t> path;
     int total_path;
     A_star_alg(cities, start, path, total_path);
@@ -236,10 +232,6 @@ void test_greeady(std::vector<std::vector<int>> cities, size_t start)
 
     std::cout << "---------- Greedy algorithm ----------\n";
 
-/*
-return the minimum path and store the actual path in a queue, named path 
-and the sum of all distances in variable total_path
-*/
     std::queue<size_t> path;
     int total_path;
     greedy_alg(cities, start, path, total_path);
