@@ -291,7 +291,7 @@ int main(int argc, char *argv[])
 {
     /* generate_random_matrix(); */
     run();
-    //for(int i = 1; i < argc; i++) run_v2(argv[i]);
+    /* for(int i = 1; i < argc; i++) run_v2(argv[i]); */
     
     return 0;
 }
