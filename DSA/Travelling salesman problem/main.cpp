@@ -23,7 +23,7 @@ and storing it in a file
 
     std::ofstream file(file_name); /* open file for writing */
     
-    if(!file.is_open()) throw "Error"; /* error opening the file => exit */
+    if(!file.is_open()) exit(-1); /* error opening the file => exit */
     
     size_t cities;
     std::cout << "Enter number of cities: ";
@@ -38,15 +38,11 @@ and storing it in a file
     {
         for (size_t j = 0; j < cities; j++)
         {
-            if(i == j)
-                file << 0; /* distance form current town to current town = 0 */
-            else
-                file << (std::rand() % upper_bound + lower_bound); /* generating a distance between 1 and 50 */
+            if(i == j) file << 0; /* distance form current town to current town = 0 */
+            else file << (std::rand() % upper_bound + lower_bound);
 
-            if(j == cities - 1)
-                file << '\n';
-            else
-                file << ", ";
+            if(j == cities - 1) file << '\n';
+            else file << ", ";
         }
     }
     
@@ -219,8 +215,9 @@ void print_info(const size_t start, std::queue<size_t>& path, const int& total_p
     while (!path.empty()) /* print the path */
     {
         std::cout << path.front(); 
-        if(path.size() > 1) 
-            std::cout << " -> ";
+        
+        if(path.size() > 1) std::cout << " -> ";
+
         path.pop();
     }
     printf("\nMinimum path: %d\n", total_path);
