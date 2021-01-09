@@ -63,7 +63,7 @@ void read(std::vector<std::vector<int>>& cities)
     std::getline(std::cin, file_name); /* read file name */
     
     std::ifstream file(file_name); /* open the file */
-    if (!file.is_open()) throw "No such file!\n";
+    if (!file.is_open()) exit(-1);
 
     std::string line;
     while (std::getline(file, line)) /* getting the file line by line */
@@ -111,7 +111,7 @@ void symmetry(std::vector<std::vector<int>>& cities)
 {
     for (size_t i = 0; i < cities.size() - 1; i++)  
         if ( (cities[i].size() != cities[i + 1].size()) || (cities.size() != cities[i].size()) ) 
-            throw "Not a symmetric matrix!\n";
+            exit(-1);
     
     for (size_t i = 0; i < cities.size(); i++)
     {
@@ -272,7 +272,7 @@ void run(void)
 void run_v2(const char *file_name)
 {
     std::ifstream file(file_name);
-    if (!file.is_open()) throw "No such file!\n";
+    if (!file.is_open()) exit(-1);
 
     std::vector<std::vector<int>> cities;
     read_v2(file, cities);
