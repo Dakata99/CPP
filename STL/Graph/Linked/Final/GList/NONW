@@ -1,0 +1,72 @@
+
+*************************************************
+----- NON-ORIENTED NON-WEIGHTED GRAPH INFO -----
+Vertex (Blagoevgrad) ---> Childs: [ (Kyustendil) (Sofiq) ]
+Vertex (Burgas) ---> Childs: [ (Plovdiv) (Varna) (Sliven) ]
+Vertex (Dobrich) ---> Childs: [ (Pleven) (Razgrad) (Varna) ]
+Vertex (Kyustendil) ---> Childs: [ (Blagoevgrad) (Sofiq) ]
+Vertex (Pleven) ---> Childs: [ (Vraca) (Razgrad) (Dobrich) ]
+Vertex (Plovdiv) ---> Childs: [ (Razgrad) (Sofiq) (Burgas) (Sliven) ]
+Vertex (Razgrad) ---> Childs: [ (Pleven) (Sofiq) (Dobrich) (Varna) (Plovdiv) ]
+Vertex (Sliven) ---> Childs: [ (Plovdiv) (Burgas) ]
+Vertex (Sofiq) ---> Childs: [ (Kyustendil) (Blagoevgrad) (Vidin) (Vraca) (Razgrad) (Plovdiv) (Varna) ]
+Vertex (Varna) ---> Childs: [ (Razgrad) (Dobrich) (Burgas) (Sofiq) ]
+Vertex (Vidin) ---> Childs: [ (Sofiq) (Vraca) ]
+Vertex (Vraca) ---> Childs: [ (Sofiq) (Vidin) (Pleven) ]
+*************************************************
+
+========== BFS ==========
+Level 1: Vidin
+Level 2: Sofiq Vraca 
+Level 3: Kyustendil Blagoevgrad Razgrad Plovdiv Varna Pleven 
+Level 4: Dobrich Burgas Sliven 
+=========================
+
+*************************************************
+----- NON-ORIENTED NON-WEIGHTED GRAPH INFO -----
+Vertex (Blagoevgrad) ---> Childs: [ (Kyustendil) (Sofiq) ]
+Vertex (Burgas) ---> Childs: [ (Plovdiv) (Varna) (Sliven) ]
+Vertex (Dobrich) ---> Childs: [ (Pleven) (Razgrad) (Varna) ]
+Vertex (Kyustendil) ---> Childs: [ (Blagoevgrad) (Sofiq) ]
+Vertex (Pleven) ---> Childs: [ (Vraca) (Razgrad) (Dobrich) ]
+Vertex (Plovdiv) ---> Childs: [ (Razgrad) (Sofiq) (Burgas) (Sliven) ]
+Vertex (Razgrad) ---> Childs: [ (Pleven) (Sofiq) (Dobrich) (Varna) (Plovdiv) ]
+Vertex (Sliven) ---> Childs: [ (Plovdiv) (Burgas) ]
+Vertex (Sofiq) ---> Childs: [ (Kyustendil) (Blagoevgrad) (Vidin) (Vraca) (Razgrad) (Plovdiv) ]
+Vertex (Varna) ---> Childs: [ (Razgrad) (Dobrich) (Burgas) ]
+Vertex (Vidin) ---> Childs: [ (Sofiq) (Vraca) ]
+Vertex (Vraca) ---> Childs: [ (Sofiq) (Vidin) (Pleven) ]
+*************************************************
+
+
+*************************************************
+----- NON-ORIENTED NON-WEIGHTED GRAPH INFO -----
+Vertex (Blagoevgrad) ---> Childs: [ (Kyustendil) ]
+Vertex (Burgas) ---> Childs: [ (Plovdiv) (Varna) (Sliven) ]
+Vertex (Dobrich) ---> Childs: [ (Pleven) (Varna) ]
+Vertex (Kyustendil) ---> Childs: [ (Blagoevgrad) (Vidin) (Plovdiv) ]
+Vertex (Pleven) ---> Childs: [ (Vraca) (Dobrich) (Plovdiv) ]
+Vertex (Plovdiv) ---> Childs: [ (Burgas) (Sliven) (Pleven) (Kyustendil) ]
+Vertex (Sliven) ---> Childs: [ (Plovdiv) (Burgas) ]
+Vertex (Varna) ---> Childs: [ (Dobrich) (Burgas) ]
+Vertex (Vidin) ---> Childs: [ (Vraca) (Kyustendil) ]
+Vertex (Vraca) ---> Childs: [ (Vidin) (Pleven) ]
+*************************************************
+
+========== BFS ==========
+Level 1: Vidin
+Level 2: Vraca Kyustendil 
+Level 3: Pleven Blagoevgrad Plovdiv 
+Level 4: Dobrich Burgas Sliven 
+Level 5: Varna 
+=========================
+Is there a vertex named Sofiq? - false
+Is there a vertex named Razgrad? - false
+Is there a vertex named Plovdiv? - true
+=== DFS : Vidin, Vraca, Kyustendil, Blagoevgrad, Plovdiv, Burgas, Varna, Dobrich, Pleven, Sliven, 
+=== DFS : Blagoevgrad, Kyustendil, Vidin, Vraca, Pleven, Dobrich, Varna, Burgas, Plovdiv, Sliven, 
+Is there a way from Blagoevgrad to Sliven? - true
+Is there a way from Vidin to Varna? - true
+Is there a way from Kyustendil to Vidin? - true
+Successors of (Plovdiv) are: [ Burgas Sliven Pleven Kyustendil ]
+Predecessors of (Plovdiv) are: [ Burgas Kyustendil Pleven Sliven ]
