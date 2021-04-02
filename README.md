@@ -1,7 +1,9 @@
-# Object - oriented programming (OOP)
+# C++
+
+## Object - oriented programming (OOP)
 	- text
 
-# Standard template library (STL)
+## Standard template library (STL)
 	- Algorithms: 
 		-- Sorting
 		-- Searching
