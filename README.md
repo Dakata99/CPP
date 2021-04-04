@@ -1,7 +1,7 @@
 # C++
 
 ## Object - oriented programming (OOP)
-	- text
+	- Collection of programming problems (Сборник от задачи)
 
 ## Standard template library (STL)
 	- Algorithms: 
