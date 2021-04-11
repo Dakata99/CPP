@@ -1,4 +1,5 @@
 #pragma once
+#include <cassert>
 
 template<class T>
 class Iterator
@@ -17,6 +18,7 @@ public:
 
     template<class E>
     friend bool operator==(const Iterator<E>&, const Iterator<E>&);
+    
     template<class E>
     friend bool operator!=(const Iterator<E>&, const Iterator<E>&);
 
@@ -24,3 +26,4 @@ public:
     bool operator!=(const Iterator& other);
     T& operator*();
 };
+

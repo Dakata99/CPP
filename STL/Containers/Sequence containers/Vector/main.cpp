@@ -3,46 +3,43 @@
 #include <vector>
 #include <cmath>
 
-void defCons()
+void def_cons(void)
 {
     Vector<int> vec;
-    for (size_t i = 0; i < 5; i++)
-        vec.push_back(i);
+    
+    for (size_t i = 0; i < 5; i++) vec.push_back(i);
     
     vec.print();
     vec.pop_back();
     std::cout << vec;
-    std::cout << vec.sizeVec() << std::endl;
+    std::cout << vec.size_vec() << std::endl;
 }
 
-void paramCons()
+void param_cons(void)
 {
     Vector<int> vec(5);
     vec.print();
-    std::cout << vec.sizeVec() << std::endl;
+    std::cout << vec.size_vec() << std::endl;
 }
 
-void paramCons2()
+void param_cons2(void)
 {
     Vector<int> vec(5, 99);
     vec.print();
-    std::cout << vec.sizeVec() << std::endl;
+    std::cout << vec.size_vec() << std::endl;
 }
 
-void copyCons()
+void copy_cons(void)
 {
     Vector<int> vec(6, 77);
     Vector<int> vec2(vec);
     vec2.print();
-    std::cout << vec2.sizeVec() << std::endl;
+    std::cout << vec2.size_vec() << std::endl;
 }
 
-void rangeCons()
-{
+void range_cons(void) {}
 
-}
-
-void assignment()
+void assignment(void)
 {
     Vector<int> vec(3, 55);
     Vector<int> vec2 = vec;
@@ -52,7 +49,7 @@ void assignment()
     vec.print();
 }
 
-void index()
+void index(void)
 {
     Vector<int> vec;
     vec.push_back(1);
@@ -63,67 +60,34 @@ void index()
     std::cout << vec.front() << std::endl << vec.back() << std::endl;   
 }
 
-void iterators()
+void iterators(void)
 {
     Vector<int> vec;
-    for (size_t i = 0; i < 10; i++)
-        vec.push_back(i);
+    for (size_t i = 0; i < 10; i++) vec.push_back(i);
     
-    for (Iterator<int> it = vec.begin();it != vec.end();it++)
-    {
-        std::cout << *it << std::endl;
-    }
+    for (Iterator<int> it = vec.begin(); it != vec.end(); it++) std::cout << *it << ' ';
+    
+    std::cout << std::endl;
 
-    Vector<int> vec2(vec.begin(), vec.end());
-    vec2.print();    
+    //Vector<int> vec2(vec.begin(), vec.end());
+    //vec2.print();    
 }
 
-void run()
+void run(void)
 {
-    //defCons();
-    //paramCons();
-    //paramCons2();
-    //copyCons();
-    //rangeCons();   //TODO
+    //def_cons();
+    //param_cons();
+    //param_cons2();
+    //copy_cons();
+    //range_cons();   //TODO
     //assignment(); //???
     //index();
     iterators();
 }
 
-int main()
+int main(void)
 {
     run();
-//     Vector(const Iterator, const Iterator);
-
-//     Iterator begin();
-//     Iterator end();
-//     Iterator rbegin();
-//     Iterator rend();
-//     Iterator cbegin();
-//     Iterator cend();
-//     Iterator crbegin();
-//     Iterator crend();
-
-//     void resize(const size_t);
-//     void resize(const size_t, const T);
-//     void reserve();
-//     void shrink_to_fit();
-
-// //modifiers
-//     void assign();
-//     void insert();
-//     void erase();
-//     void swap();
-//     void clear();
-//     void emplace();
-//     void emplace_back();
-
-//     void get_allocator();
-
-//     bool operator>=(const Vector&)const;
-//     bool operator>(const Vector&)const;
-//     bool operator<=(const Vector&)const;
-//     bool operator<(const Vector&)const;
 
     return 0;
 }

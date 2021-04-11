@@ -14,13 +14,13 @@ private:
 private:
     void copy(const Vector&);
     void del();
-    void init(const size_t, const T);
+    void init(const size_t, const T&);
 
 public:
 //member functions
     Vector();
     Vector(const size_t);
-    Vector(const size_t, const T);
+    Vector(const size_t, const T&);
     Vector(const Vector&);
     Vector(const Iterator<T>&, const Iterator<T>&);
     ~Vector();
@@ -37,11 +37,11 @@ public:
     // Iterator crend();
 
 //capacity
-    size_t sizeVec()const;
-    size_t max_sizeVec()const;
+    size_t size_vec()const;
+    size_t max_size_vec()const;
     void resize(const size_t);
-    void resize(const size_t, const T);
-    size_t capacityVec()const;
+    void resize(const size_t, const T&);
+    size_t capacity_vec()const;
     bool empty()const;
     void reserve();
     void shrink_to_fit();
@@ -51,7 +51,7 @@ public:
     T& at(size_t);
     T& front();
     T& back();
-    T* data2();
+    T* get_data();
 
 //modifiers
     void assign();
@@ -65,21 +65,21 @@ public:
     void emplace_back();
 
 //allocator
-    void get_allocator();
+    void get_allocator(void);
 
 //non-member function overloads
-    bool operator==(const Vector&)const;
-    bool operator!=(const Vector&)const;
-    bool operator>=(const Vector&)const;
-    bool operator>(const Vector&)const;
-    bool operator<=(const Vector&)const;
-    bool operator<(const Vector&)const;
+    bool operator==(const Vector&) const;
+    bool operator!=(const Vector&) const;
+    bool operator>=(const Vector&) const;
+    bool operator>(const Vector&) const;
+    bool operator<=(const Vector&) const;
+    bool operator<(const Vector&) const;
 
 //printing funcs
     template<class E>
     friend std::ostream& operator<<(std::ostream&, const Vector<E>&);
     
-    void print()const;
+    void print(void) const;
 };
 
 #include "Iterator.cpp"
