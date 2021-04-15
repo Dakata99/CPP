@@ -15,10 +15,7 @@ void param_cons(void)
 {
     Vector<int> vec(5);
     std::cout << vec.get_size() << std::endl;
-}
-
-void param_cons2(void)
-{
+    
     Vector<int> vec(5, 99);
     std::cout << vec.get_size() << std::endl;
 }
@@ -62,7 +59,7 @@ void iterators(void)
     //Vector<int> vec2(vec.begin(), vec.end());
 }
 
-void run(void)
+void run(void);
 {
     def_cons();
     param_cons();

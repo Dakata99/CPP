@@ -2,10 +2,10 @@ CC = g++
 CFLAGS = -I.
 
 %.o: %.cpp %.h 
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 main: main.o String.o Tests.o
-	$(CC) -o main main.o String.o Tests.o 
+	$(CC) main.o String.o Tests.o -o a.out  
 	
 all: main clean
 	
