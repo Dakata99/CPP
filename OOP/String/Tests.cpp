@@ -104,3 +104,11 @@ void getters_and_setters(void)
 	std::cout << s1.get_string() << std::endl;
 }
 
+void run(void)
+{
+	constuctors();
+	operators();
+	input_output_operators();
+	getters_and_setters();
+}
+

@@ -1,4 +1,6 @@
 #include "Tests.h"
+#include "Vector.cpp"
+#include "Iterator.cpp"
 
 void def_cons(void)
 {
@@ -16,8 +18,8 @@ void param_cons(void)
     Vector<int> vec(5);
     std::cout << vec.get_size() << std::endl;
     
-    Vector<int> vec(5, 99);
-    std::cout << vec.get_size() << std::endl;
+    Vector<int> vec2(5, 99);
+    std::cout << vec2.get_size() << std::endl;
 }
 
 void copy_cons(void)
@@ -59,11 +61,10 @@ void iterators(void)
     //Vector<int> vec2(vec.begin(), vec.end());
 }
 
-void run(void);
+void run(void)
 {
     def_cons();
     param_cons();
-    param_cons2();
     copy_cons();
     range_cons();   //TODO
     assignment(); //???

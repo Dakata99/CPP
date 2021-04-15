@@ -1,6 +1,4 @@
-#ifndef _VECTOR_H_
-#define _VECTOR_H_
-
+#pragma once
 #include <iostream>
 #include <cassert>
 #include <cmath>
@@ -86,6 +84,4 @@ public:
     template<class E>
     friend std::ostream& operator<<(std::ostream&, const Vector<E>&);
 };
-
-#endif
 

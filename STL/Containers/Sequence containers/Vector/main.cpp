@@ -5,7 +5,7 @@
 
 int main(void)
 {
-	Vector<int> vec;
+	run();
 	
     return 0;
 }

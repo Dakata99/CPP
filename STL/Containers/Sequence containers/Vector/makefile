@@ -1,13 +1,13 @@
-CC = g++
-COMPILE = $(CC) -c
-CFLAGS = -I.
+CPP = g++
+COMPILE = $(CPP) -c
+CPPFLAGS = -I.
 
-%.o: %.cpp %.h
-	$(CC) -c -o $@ $< $(CFLAGS)
+%.o: %.cpp 
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 main: main.o Vector.o Iterator.o Tests.o
-	$(CC) main.o Vector.o Iterator.o Tests.o -o a.out
-	
+	$(CPP) $(CPPFLAGS) main.o Vector.o Iterator.o Tests.o -o a.out 
+ 
 all: main clean
 
 clean:

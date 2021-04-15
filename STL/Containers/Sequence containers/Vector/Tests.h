@@ -1,5 +1,4 @@
-#ifndef _TESTS_H_
-#define _TESTS_H_
+#pragma once
 
 #include "Vector.h"
 #include "Iterator.h"
@@ -13,6 +12,4 @@ void index(void);
 void iterators(void);
 
 void run(void);
-
-#endif
 
