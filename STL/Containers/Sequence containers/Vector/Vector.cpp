@@ -1,6 +1,4 @@
 #include "Vector.h"
-#include <cmath>
-#include <assert.h>
 
 //private funcs
 template<class T>
@@ -39,7 +37,14 @@ template<class T>
 Vector<T>::Vector(const Vector<T>& other) { copy(other); }
 
 template<class T>
-Vector<T>::Vector(const Iterator<T>& begin, const Iterator<T>& end) {}
+Vector<T>::Vector(const Iterator<T>& begin, const Iterator<T>& end) 
+{
+	while (begin != end)
+	{
+		push_back(*begin);
+		begin++;
+	}
+}
 
 template<class T>
 Vector<T>::~Vector() { del(); }
@@ -57,45 +62,45 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other)
 
 //Iterators
 template<class T>
-Iterator<T> Vector<T>::begin() { return Iterator<T>(this->data); }
+Iterator<T> Vector<T>::begin(void) { return Iterator<T>(this->data); }
 
 template<class T>
-Iterator<T> Vector<T>::end() { return Iterator<T>(this->data + size); }
+Iterator<T> Vector<T>::end(void) { return Iterator<T>(this->data + size); }
 
-// template<class T>
-// Iterator<T>::Iterator rbegin() {}
+template<class T>
+Iterator<T> Vector<T>::rbegin(void) { return Iterator<T>(this->data + size); }
 
-// template<class T>
-// Iterator<T>::Iterator rend() {}
+template<class T>
+Iterator<T> Vector<T>::rend(void) { return Iterator<T>(this->data); }
 
-// template<class T>
-// Iterator<T>::Iterator cbegin() {}
+template<class T>
+Iterator<T> Vector<T>::cbegin(void) const { return Iterator<T>(this->data); }
 
-// template<class T>
-// Iterator<T>::Iterator cend() {}
+template<class T>
+Iterator<T> Vector<T>::cend(void) const { return Iterator<T>(this->data + size); }
 
-// template<class T>
-// Iterator<T>::Iterator crbegin() {}
+template<class T>
+Iterator<T> Vector<T>::crbegin(void) const { return Iterator<T>(this->data + size); }
 
-// template<class T>
-// Iterator<T>::Iterator crend() {}
+template<class T>
+Iterator<T> Vector<T>::crend(void) const { return Iterator<T>(this->data); }
 
 //capacity
 template<class T>
-size_t Vector<T>::size_vec() const { return size; }
+size_t Vector<T>::get_size(void) const { return size; }
 
 template<class T>
-size_t Vector<T>::max_size_vec() const { return pow(2, 64) / sizeof(T) - 1; }
+size_t Vector<T>::get_max_size(void) const { return pow(2, 64) / sizeof(T) - 1; }
 
 template<class T>
-void Vector<T>::resize(const size_t num)
+void Vector<T>::resize(size_t new_size, T& value)
 {
-    const T* temp = new T[num];
+    const T* temp = new T[new_size];
     for (size_t i = 0; i < size; i++) temp[i] = data[i];
     
     delete [] data;
     
-    size = num;
+    size = new_size;
     data = new T[size];
     
     for (size_t i = 0; i < size; i++) data[i] = temp[i];
@@ -104,71 +109,47 @@ void Vector<T>::resize(const size_t num)
 }
 
 template<class T>
-void Vector<T>::resize(const size_t num, const T& val)
-{
-    const T* temp = new T[num];
-    for (size_t i = 0; i < size; i++) temp[i] = data[i];
-    
-    delete [] data;
-    
-    size = num;
-    data = new T[size];
-    
-    for (size_t i = 0; i < size; i++) data[i] = temp[i];
-    
-    delete [] temp;
-}
+size_t Vector<T>::capacity_vec(void) const { return capacity; }
 
 template<class T>
-size_t Vector<T>::capacity_vec() const { return capacity; }
+bool Vector<T>::empty(void) const { return size == 0; }
 
 template<class T>
-bool Vector<T>::empty() const { return size == 0; }
+void Vector<T>::reserve(size_t new_size) {}
 
 template<class T>
-void Vector<T>::reserve() {}
-
-template<class T>
-void Vector<T>::shrink_to_fit() {}
+void Vector<T>::shrink_to_fit(void) {}
 
 //element access
 template<class T>
-T& Vector<T>::operator[](size_t index)
+T& Vector<T>::operator[](size_t index) const
 {
-    assert(index >= 1 && index <= size);
-    return data[index - 1];
+    assert(index >= 0 && index <= size - 1);
+    return data[index];
 }
 
 template<class T>
-T& Vector<T>::at(size_t index)
+T& Vector<T>::at(size_t index) const
 {
-    assert(index >= 1 && index <= size);
-    return data[index - 1];
+    assert(index >= 0 && index <= size - 1);
+    return data[index];
 }
 
 template<class T>
-T& Vector<T>::front()
-{
-    assert(data != nullptr);
-    return data[0];
-}
+T& Vector<T>::front(void) const { assert(data != nullptr); return data[0]; }
 
 template<class T>
-T& Vector<T>::back()
-{
-    assert(data != nullptr);
-    return data[size - 1];
-}
+T& Vector<T>::back(void) const {  assert(data != nullptr); return data[size - 1]; }
 
 template<class T>
-T* Vector<T>::get_data() { return data; }
+T* Vector<T>::get_data(void) { return data; }
 
 //modifiers
 template<class T>
-void Vector<T>::assign() {}
+void Vector<T>::assign(size_t new_size, const T& value) {}
 
 template<class T>
-void Vector<T>::push_back(const T element)
+void Vector<T>::push_back(const T& element)
 {
     if (data == nullptr)
     {
@@ -193,16 +174,16 @@ void Vector<T>::push_back(const T element)
 }
 
 template<class T>
-void Vector<T>::pop_back()
+void Vector<T>::pop_back(void)
 {
-    if (size == 0) return;
-    
-    T* temp = new T[size - 1];
-    for (size_t i = 0; i < size - 1; i++) temp[i] = data[i];
-
-    delete [] data;
+    if (data == nullptr || size == 0) return;
     
     size--;
+    
+    T* temp = new T[size];
+    for (size_t i = 0; i < size; i++) temp[i] = data[i];
+
+    delete [] data;
     data = new T[size];
     
     for (size_t i = 0; i < size; i++) data[i] = temp[i];
@@ -211,26 +192,22 @@ void Vector<T>::pop_back()
 }
 
 template<class T>
-void Vector<T>::insert() {}
+void Vector<T>::insert(void) {}
 
 template<class T>
-void Vector<T>::erase() {}
+void Vector<T>::erase(void) {}
 
 template<class T>
-void Vector<T>::swap() {}
+void Vector<T>::swap(Vector<T>& x) {}
 
 template<class T>
-void Vector<T>::clear() {}
+void Vector<T>::clear(void) { del(); }
 
 template<class T>
-void Vector<T>::emplace() {}
+void Vector<T>::emplace(void) {}
 
 template<class T>
-void Vector<T>::emplace_back() {}
-
-//allocator
-template<class T>
-void Vector<T>::get_allocator() {}
+void Vector<T>::emplace_back(void) {}
 
 //non-member function overloads
 template<class T>
@@ -259,6 +236,9 @@ bool Vector<T>::operator<=(const Vector<T>& other) const { return false; }
 template<class T>
 bool Vector<T>::operator<(const Vector<T>& other) const { return false; }
 
+template<class T>
+void swap(Vector<T>& x, Vector<T>& y) {}
+
 //printing funcs
 template<class T>
 std::ostream& operator<<(std::ostream& os, const Vector<T>& vector)
@@ -272,12 +252,3 @@ std::ostream& operator<<(std::ostream& os, const Vector<T>& vector)
     return os;
 }
 
-template<class T>
-void Vector<T>::print(void) const
-{
-    std::cout << "( ";
-    
-    for (size_t i = 0; i < size; i++) std::cout << data[i] << " ";
-    
-    std::cout << ")\n";
-}

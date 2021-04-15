@@ -8,8 +8,7 @@ private:
     T* pointer;
 
 public:
-    Iterator();
-    Iterator(T*);
+    Iterator(T* = nullptr);
     
     Iterator& operator++();
     Iterator& operator--();
@@ -24,6 +23,6 @@ public:
 
     bool operator==(const Iterator& other);
     bool operator!=(const Iterator& other);
-    T& operator*();
+    T& operator*() const;
 };
 

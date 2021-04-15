@@ -1,4 +1,6 @@
 #pragma once
+#include <cassert>
+#include <cmath>
 
 template<class T>
 class Iterator;
@@ -17,70 +19,71 @@ private:
     void init(const size_t, const T&);
 
 public:
-//member functions
+//Constructors
     Vector();
     Vector(const size_t);
     Vector(const size_t, const T&);
     Vector(const Vector&);
     Vector(const Iterator<T>&, const Iterator<T>&);
     ~Vector();
+    
     Vector& operator=(const Vector&);
 
 //Iterators
-    Iterator<T> begin();
-    Iterator<T> end();
-    // Iterator rbegin();
-    // Iterator rend();
-    // Iterator cbegin();
-    // Iterator cend();
-    // Iterator crbegin();
-    // Iterator crend();
+    Iterator<T> begin(void);
+    Iterator<T> end(void);
+    Iterator<T> rbegin(void);
+    Iterator<T> rend(void);
+    Iterator<T> cbegin(void) const;
+    Iterator<T> cend(void) const;
+    Iterator<T> crbegin(void) const;
+    Iterator<T> crend(void) const;
 
 //capacity
-    size_t size_vec()const;
-    size_t max_size_vec()const;
-    void resize(const size_t);
-    void resize(const size_t, const T&);
-    size_t capacity_vec()const;
-    bool empty()const;
-    void reserve();
-    void shrink_to_fit();
+    size_t get_size(void) const;
+    size_t get_max_size(void) const;
+    void resize(size_t, T& = T());
+    size_t capacity_vec(void) const;
+    bool empty(void) const;
+    void reserve(size_t);
+    void shrink_to_fit(void);
 
 //element access
-    T& operator[](size_t);
-    T& at(size_t);
-    T& front();
-    T& back();
-    T* get_data();
+    T& operator[](size_t) const;
+    T& at(size_t) const;
+    T& front(void) const;
+    T& back(void) const;
+    T* get_data(void);
 
 //modifiers
-    void assign();
-    void push_back(const T);
-    void pop_back();
-    void insert();
-    void erase();
-    void swap();
-    void clear();
-    void emplace();
-    void emplace_back();
-
-//allocator
-    void get_allocator(void);
+    void assign(size_t, const T&);
+    void push_back(const T&);
+    void pop_back(void);
+    void insert(void);
+    void erase(void);
+    void swap(Vector<T>&);
+    void clear(void);
+    void emplace(void);
+    void emplace_back(void);
 
 //non-member function overloads
     bool operator==(const Vector&) const;
     bool operator!=(const Vector&) const;
+    
     bool operator>=(const Vector&) const;
     bool operator>(const Vector&) const;
+    
     bool operator<=(const Vector&) const;
     bool operator<(const Vector&) const;
+    
+    template<class E>
+    friend void swap(Vector<E>&, Vector<E>&);
 
 //printing funcs
     template<class E>
     friend std::ostream& operator<<(std::ostream&, const Vector<E>&);
-    
-    void print(void) const;
 };
 
-#include "Iterator.cpp"
 #include "Vector.cpp"
+#include "Iterator.cpp"
+

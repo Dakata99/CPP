@@ -1,9 +1,6 @@
 #include "Iterator.h"
 
 template<class T>
-Iterator<T>::Iterator():pointer(nullptr) {}
-
-template<class T>
 Iterator<T>::Iterator(T* ptr):pointer(ptr) {}
 
 template<class T>
@@ -55,5 +52,5 @@ template<class T>
 bool Iterator<T>::operator!=(const Iterator& other) { return pointer != other.pointer; }
 
 template<class T>
-T& Iterator<T>::operator*() { return *pointer; }
+T& Iterator<T>::operator*() const { return *pointer; }
 
