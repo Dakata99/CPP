@@ -1,5 +1,8 @@
-#pragma once
+#ifndef _TESTS_H_
+#define _TESTS_H_
+
 #include "Vector.h"
+#include "Iterator.h"
 
 void def_cons(void);
 void param_cons(void);
@@ -12,5 +15,5 @@ void iterators(void);
 
 void run(void);
 
-#include "Tests.cpp"
+#endif
 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _TESTS_H_
+#define _TESTS_H_
+
 #include <cassert>
 
 template<class T>
@@ -25,4 +27,6 @@ public:
     bool operator!=(const Iterator& other);
     T& operator*() const;
 };
+
+#endif
 

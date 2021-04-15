@@ -1,4 +1,7 @@
-#pragma once
+#ifndef _VECTOR_H_
+#define _VECTOR_H_
+
+#include <iostream>
 #include <cassert>
 #include <cmath>
 
@@ -84,6 +87,5 @@ public:
     friend std::ostream& operator<<(std::ostream&, const Vector<E>&);
 };
 
-#include "Vector.cpp"
-#include "Iterator.cpp"
+#endif
 

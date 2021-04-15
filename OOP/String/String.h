@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <cassert>
 #include <cstring>
 #include <limits>
@@ -88,5 +89,3 @@ public:
     void set_string(const char*);
 };
     
-#include "String.cpp"
-
