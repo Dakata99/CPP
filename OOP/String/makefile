@@ -7,7 +7,7 @@ CFLAGS = -I.
 main: main.o String.o Tests.o
 	$(CC) -o main main.o String.o Tests.o 
 	
-all: main
+all: main clean
 	
 clean:
 	rm *.o
