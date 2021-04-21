@@ -12,7 +12,6 @@ private:
     
 private:
 	void copy(const char*);
-	void copy(const String&);
     
 public:
     //Constructors
@@ -80,10 +79,12 @@ public:
     
     //operator<<
     friend std::ostream& operator<<(std::ostream&, const String&);
+    
+    bool empty(void) const;
 
     //Getters
-    char* get_string() const;
-    size_t get_length() const;
+    char* get_string(void) const;
+    size_t get_length(void) const;
 
     //Setters
     void set_string(const char*);

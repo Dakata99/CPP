@@ -7,14 +7,12 @@ void String::copy(const char* string)
     strcpy(str, string);
 }
 
-void String::copy(const String& string) { copy(string.get_string()); }
-
 //Constructors
 String::String() { len = 0; copy(""); }
 
 String::String(const char* string) { copy(string); }
 
-String::String(const String& string) { copy(string); }
+String::String(const String& string) { copy(string.get_string()); }
     
 //Destructors
 String::~String() { delete [] str; }
@@ -25,7 +23,7 @@ String& String::operator=(const String& other)
 	if(this != &other)
 	{
     	delete [] str;
-    	copy(other);
+    	copy(other.get_string());
 	}
 	
     return *this;
@@ -232,6 +230,8 @@ std::istream& operator>>(std::istream& is, String& string)
 
 	return is;
 }
+
+bool String::empty(void) const { return str == nullptr && len == 0; }
 
 //Getters
 char* String::get_string() const { return str; }
