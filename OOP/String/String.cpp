@@ -132,6 +132,8 @@ bool operator<(const String& string, const char* str)
 }
 
 //opeartor+
+String operator+(String& str1, String& str2) { return str1 += str2; }
+
 String operator+(const String& str1, const String& str2)
 {
 	String tmp = str1;
@@ -245,3 +247,44 @@ void String::set_string(const char* string)
 	else { delete [] str; copy(string); }
 }
 
+bool String::contains(const char* substr) const
+{
+	const char* tmp = substr;
+	char* copy = str;   
+
+	if (strlen(substr) > len) return false;
+	else if (strcmp(str, substr) == 0) return true;
+	
+	while (*copy++)
+	{
+		if (*tmp == *copy) tmp++;
+	}
+	
+	return *tmp == '\0';
+}
+
+bool String::contains(const String& str) const { return contains(str.get_string()); }
+
+String String::substr(size_t from) const
+{
+	assert(from >= 0 && from <= len - 1);
+	
+	return String(str + from);
+}
+
+String String::substr(size_t from, size_t till) const
+{
+	assert (from >= 0 && from <= len - 1);
+
+	char* tmp = str + from;
+
+	String res(tmp);
+
+	while (from++ != till || *tmp != '\0') res += *tmp;
+	
+	return res; 
+}
+
+String& String::operator*(size_t mult) { while (mult--) *this += str; return *this; }
+    
+String& String::operator*=(size_t mult) { return (*this) * mult; }

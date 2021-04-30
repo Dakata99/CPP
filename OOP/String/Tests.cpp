@@ -112,3 +112,27 @@ void run(void)
 	getters_and_setters();
 }
 
+void hw_tests(void)
+{
+	String s1(); //""
+	String s2("Test");
+
+	s2.substr(2); // st
+
+	s2.substr(1, 2); // es
+
+	s1 = "pronto";	
+
+	s2.contains(s1); //false
+
+	String s3 = s1 + s2; // prontoTest
+
+	s3 *= 3; //prontoTestprontoTestprontoTest
+
+	std::cin >> s3;
+	std::cout << s3 << std::endl;
+
+	s3 == s1; //false;
+}
+
+

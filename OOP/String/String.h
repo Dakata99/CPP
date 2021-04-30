@@ -65,6 +65,7 @@ public:
     friend bool operator<(const String&, const char*);
     
     //operator+
+    friend String operator+(String&, String&);
     friend String operator+(const String&, const String&);
     friend String operator+(const char*, const String&);
     friend String operator+(const String&, const char*);
@@ -88,5 +89,15 @@ public:
 
     //Setters
     void set_string(const char*);
+    
+    /* some additional methods */
+    bool contains(const String&) const;
+    bool contains(const char*) const;
+    
+    String substr(size_t = 0) const;
+    String substr(size_t, size_t) const;
+    
+    String& operator*(size_t);
+    String& operator*=(size_t);
 };
     

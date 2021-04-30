@@ -4,7 +4,8 @@
 
 int main(void)
 {
-	run();
+	//run();
+	hw_tests();
 			
 	return 0;
 }
