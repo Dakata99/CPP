@@ -5,6 +5,7 @@ class Triangle
 {
 protected:
     double a, b, c;
+    
 public:
     void init(const double x, const double y, const double z)
     {
@@ -14,16 +15,10 @@ public:
             b = y;
             c = z;
         }
-        else
-        {
-            std::cout << "Invalid parameters!" << std::endl;
-        }
+        else std::cout << "Invalid parameters!" << std::endl;
     }
-    double perimeter()const
-    {
-        return a + b + c;
-    }
-    double area()const
+    double perimeter() const { return a + b + c; }
+    double area() const
     {
         double p = (a + b + c)/2;
         return sqrt(p*(p - a)*(p - b)*(p - c));
@@ -33,7 +28,7 @@ public:
         std::cout << a << " " << b << " " << c << std::endl;
     }
 };
-class RightTriangle:public Triangle
+class RightTriangle : public Triangle
 {
 public:
     void init(const double x, const double y, const double z)
