@@ -6,7 +6,11 @@ void Queue<T>::clear(void) { delete [] data; }
 template <class T>
 void Queue<T>::copy(const Queue<T>& other)
 {
+	size = other.size;
+	max_size = other.max_size;
+	data = new T[size];
 	
+	for (size_t i = 0; i < size; i++) data[i] = other.data[i];
 }
 
 template <class T>
@@ -32,22 +36,34 @@ Queue<T>& Queue<T>::operator=(const Queue<T>& other)
 }
 
 template <class T>
-bool Queue<T>::empty(void) const { return size == 0; }
+bool Queue<T>::empty(void) const noexcept { return size == 0; }
 
 template <class T>
-const size_t Queue<T>::get_size(void) const { return size; }
+const size_t Queue<T>::size(void) const noexcept { return size; }
 
 template <class T>
-const T& Queue<T>::front(void) const { assert(data != nullptr); return data[0]; }
+const T& Queue<T>::front(void) const 
+{ 
+	if (data == nullptr) throw std::bad_alloc("Accessing null pointer!\n"); 
+	
+	try return data[0];
+	catch (std::out_of_range& error) std::cerr << error.what();
+}
 
 template <class T>
-const T& Queue<T>::back(void) const { assert(data != nullptr); return data[size - 1]; }
+const T& Queue<T>::back(void) const
+{ 
+	if (data == nullptr) throw std::bad_alloc("Accessing null pointer!\n"); 
+	
+	try return data[size - 1];
+	catch (std::out_of_range& error) std::cerr << error.what();
+}
 
 template <class T>
 void Queue<T>::push(const T& elem)
 {
 	if (size + 1 >= max_size) resize(max_size * 2);
-	//else if (max_size == size / 2) max_size /= 2;
+	
 	data[size++] = elem;
 }
 
@@ -55,10 +71,25 @@ template <class T>
 void Queue<T>::emplace(const T& elem) {}
 
 template <class T>
-void Queue<T>::pop(void) { assert(size > 0); size--; }
+void Queue<T>::pop(void) 
+{
+	if (size <= 0) throw std::out_of_range("NULL pointer occured!\n");
+	
+	try
+	{
+		if (2 * size < max_size) resize(max_size / 2);
+		size--;
+	}
+	catch (std::out_of_range& error) std::cerr << error.what(); 
+}
 
 template <class T>
-void Queue<T>::swap(Queue<T>&);
+void Queue<T>::swap(Queue<T>& other)
+{
+	Queue<T> tmp(other);
+	
+	
+}
 
 /* relational operators */
 template <class T>

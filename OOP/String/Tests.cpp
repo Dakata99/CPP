@@ -2,25 +2,29 @@
 
 void constuctors(void)
 {
-	String s1, s2("Testing strings"), s3(s2);
+	String strs[] = { 
+						String(), String("Testing strings"), String(strs[1]), 
+					  	String(strs[2], 3, 7), String("Hello world!", 12), String(10, 'x')
+					};
+	for (size_t i = 0; i < 6; i++) std::cout << "S" << i << ") = " << strs[i] << std::endl;
+	
+}
+
+void operators(void)
+{
+	String tmp("Testing string");
+	
+	//operator=
+	String s1 = tmp, s2 = "Other tests", s3 = 'x';
 	
 	std::cout << "S1 = " << s1 << std::endl;
 	std::cout << "S2 = " << s2 << std::endl;
 	std::cout << "S3 = " << s3 << std::endl;
 }
 
-void operators(void)
+void relational_operators(void)
 {
-	String s1, s2("Testing strings"), s3(s2);
-	
-	//operator=
-	s1 = s3;
-	s2 = "Other tests";
-	
-	std::cout << "S1 = " << s1 << std::endl;
-	std::cout << "S2 = " << s2 << std::endl;
-	std::cout << "S3 = " << s3 << std::endl;
-	
+	String s1, s2, s3;
 	//operator[]
 	std::cout << s2[2] << std::endl;
 	
@@ -95,13 +99,12 @@ void getters_and_setters(void)
 	String s1, s2("Testing strings"), s3(s2);
 	
 	//Getters
-	std::cout << s1.get_length() << std::endl;
-	std::cout << s2.get_string() << std::endl;
-	std::cout << s3.get_length() << std::endl;
+	std::cout << s1.length() << std::endl;
+	std::cout << s2.c_str() << std::endl;
+	std::cout << s3.length() << std::endl;
 
 	//Setters
-	s1.set_string("Other tests");
-	std::cout << s1.get_string() << std::endl;
+	std::cout << s1.c_str() << std::endl;
 }
 
 void run(void)
