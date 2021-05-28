@@ -1,9 +1,13 @@
-#pragma once
+#ifndef _STRING_H_
+#define _STRING_H_
+
 #include <iostream>
 #include <cassert>
 #include <cstring>
 #include <limits>
- 
+
+class Iterator;
+
 class String
 {
 private:
@@ -90,3 +94,4 @@ public:
     void set_string(const char*);
 };
     
+#endif

@@ -1,13 +1,15 @@
-CC = g++
-CFLAGS = -I.
+CPP = g++
+CPPFLAGS = -I.
 
-%.o: %.cpp %.h 
-	$(CC) $(CFLAGS) -c -o $@ $<
+default = all
 
-main: main.o String.o Tests.o
-	$(CC) main.o String.o Tests.o -o a.out  
+%.o:	%.cpp
+	$(CPP) $(CPPFLAGS) -c -o $@ $<
+
+main:	String.o Tests.o main.o
+	$(CPP) $(CPPFLAGS) String.o Tests.o main.o -o a.out  
 	
-all: main clean
+all:	main clean
 	
 clean:
-	rm *.o
+	rm -f *.o
