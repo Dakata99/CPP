@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GLIST_H_
+#define _GLIST_H_
+
 #include "../Graph.h"
 #include <vector>
 #include <list>
@@ -54,3 +56,5 @@ public:
 };
 
 #include "GList.cpp"
+
+#endif
