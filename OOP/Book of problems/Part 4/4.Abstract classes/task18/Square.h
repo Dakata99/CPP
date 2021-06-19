@@ -1,14 +1,19 @@
-#pragma once
+#ifndef _SQUARE_H_
+#define _SQUARE_H_
+
 #include "Figure.h"
 
-class Square:public Figure
+class Square : public Figure
 {
 private:
     double side;
-public:
-    Square(double = 0, double = 0, double = 0);
 
-    virtual void print()const;
-    double perimeter()const override;
-    double area()const override;
+public:
+    Square(const double&, const double&, const double&);
+
+    virtual void print(void) const;
+    double perimeter(void) const override;
+    double area(void) const override;
 };
+
+#endif

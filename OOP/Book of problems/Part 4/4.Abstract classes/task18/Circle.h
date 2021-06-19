@@ -1,13 +1,19 @@
-#pragma once
+#ifndef _CIRCLE_H_
+#define _CIRCLE_H_
+
 #include "Figure.h"
 
-class Circle:public Figure
+class Circle : public Figure
 {
 private:
     double radius;
+
 public:
-    Circle(double = 0, double = 0, double = 0);
-    double perimeter()const override;
-    double area()const override;
-    virtual void print()const;
+    Circle(const double&, const double&, const double&);
+    
+    double area(void) const override;
+    double perimeter(void) const override;
+    virtual void print(void) const;
 };
+
+#endif
