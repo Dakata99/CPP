@@ -1,15 +1,30 @@
 CPP = g++
-CPPFLAGS = -I.
+CPPFLAGS = -I .
 
-default = all
+SOURCES = $(wildcard *.cpp)
+HEADERS = $(wildcard *.h)
+OBJS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
-%.o:	%.cpp
-	$(CPP) $(CPPFLAGS) -c -o $@ $<
+default: all
 
-main:	String.o Tests.o main.o
-	$(CPP) $(CPPFLAGS) String.o Tests.o main.o -o a.out  
-	
-all:	main clean
-	
+%.o: %.cpp
+	$(CPP) $(CPPFLAGS) -c $<
+
+main: String.o main.o
+	$(CPP) $(CPPFLAGS) String.o main.o -o main
+	./main
+
+test:
+	$(CPP) $(CPPFLAGS) String.cpp tests.cpp -o test
+	./test
+
+all: main test clean
+	rm -f main test
+
 clean:
 	rm -f *.o
+
+print_files:
+	@echo $(SOURCES)
+	@echo $(HEADERS)
+	@echo $(OBJS)

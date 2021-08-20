@@ -541,8 +541,8 @@ String operator+(const String& string, const char* cstr)
 	
 /* operator == */
 bool operator== (const String& lhs, const String& rhs) { return strcmp(lhs.cstr, rhs.cstr) == 0; }
-bool operator== (const char* lhs, const String& rhs) { return strcmp(lhs, rhs.cstr); }
-bool operator== (const String& lhs, const char* rhs) { return strcmp(lhs.cstr, rhs); }
+bool operator== (const char* lhs, const String& rhs) { return strcmp(lhs, rhs.cstr) == 0; }
+bool operator== (const String& lhs, const char* rhs) { return strcmp(lhs.cstr, rhs) == 0; }
 
 /* operator != */
 bool operator!= (const String& lhs, const String& rhs) { return strcmp(lhs.cstr, rhs.cstr) != 0; }
@@ -611,6 +611,7 @@ bool operator<= (const String& lhs, const char* rhs)
 	if (lhs.len >= strlen(rhs)) return false;
 
 	size_t tmp_len = lhs.len;
+
 	for (size_t i = 0; i < tmp_len; i++)
 		if (lhs.cstr[i] >= rhs[i]) return false;
 
