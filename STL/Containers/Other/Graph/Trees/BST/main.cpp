@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "BST.h"
-#include "../../../../../Iterators/Position.h"
-#include "../../../../../Iterators/Iterator.h"
+#include "../../../../../Iterators/Trees iterators/Position.h"
+#include "../../../../../Iterators/Trees iterators/Iterator.h"
 
 void run(void)
 {
