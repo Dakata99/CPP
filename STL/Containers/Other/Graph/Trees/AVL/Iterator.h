@@ -1,7 +1,9 @@
-#pragma once
+#ifndef _ITERATOR_H_
+#define _ITERATOR_H_
+
 #include "AVL.h"
 
-template<class T>
+template <class T>
 class Iterator
 {
 private:
@@ -11,3 +13,5 @@ public:
 };
 
 #include "Iterator.cpp"
+
+#endif

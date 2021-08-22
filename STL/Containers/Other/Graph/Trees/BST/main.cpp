@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "BST.h"
 #include "Position.h"
 #include "Iterator.h"
@@ -19,7 +20,7 @@ void run(void)
     t1.insert_iter(28);
     
 
-    t1.print2D();   
+    t1.print2D();
     t1.remove(28);
     t1.print2D();
     t1.remove(30);
@@ -27,7 +28,7 @@ void run(void)
     t1.remove(20);
     t1.print2D();
 
-#if 0
+#if 1
     std::vector<int> vec = { 36, 52, 7, 4, 3, 59, 0, 1, 8, 45, -1, 124, -1 };
     BST<int> t2;
     t2.create(vec);

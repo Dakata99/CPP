@@ -1,26 +1,20 @@
-#include "BTree.h"
 #define COUNT 5
 
-template<class T>
-BTree<T>::Node::Node(Node *l, const T& val, Node *r):left(l), value(val), right(r){}
+template <class T>
+BTree<T>::Node::Node(Node* l, const T& val, Node* r) : left(l), value(val), right(r) {}
 
-template<class T>
-typename BTree<T>::Node * BTree<T>::copy(Node *r1, Node *r2)
+template <class T>
+void BTree<T>::copy_rec(Node*& root, const Node* other_root)
 {
-    if(r2 == nullptr) return nullptr;
+    if(other_root == nullptr) return;
 
-    r1 = new Node(nullptr, r2->value, nullptr);
-    r1->left = copy(r1->left, r2->left);
-    r1->right = copy(r1->right, r2->right);
-
-    return r1;
+    root = new Node(nullptr, other_root->value, nullptr);
+    copy_rec(root->left, other_root->left);
+    copy_rec(root->right, other_root->right);
 }
 
-template<class T>
-void BTree<T>::copy(const BTree<T>& other) { root = copy(root, other.root); }
-
-template<class T>
-bool BTree<T>::search_element(Node *root, const T& element) const
+template <class T>
+bool BTree<T>::search_element(Node* root, const T& element) const
 {
     if(root == nullptr) return false;
     else if(root->value == element) return true;
@@ -29,11 +23,11 @@ bool BTree<T>::search_element(Node *root, const T& element) const
     return search_element(root->left, element) || search_element(root->right, element);
 }
 
-template<class T>
+template <class T>
 bool BTree<T>::search(const T& element) const { return search_element(root, element); }
 
-template<class T>
-void BTree<T>::print(Node *root, int tabs)const
+template <class T>
+void BTree<T>::print(Node* root, int tabs)const
 {
     if(root == nullptr) return;
 
@@ -47,8 +41,8 @@ void BTree<T>::print(Node *root, int tabs)const
     print(root->left, tabs);
 }
 
-template<class T>
-void BTree<T>::print2D()const
+template <class T>
+void BTree<T>::print2D(void) const
 {
     if(root == nullptr) return;
 
@@ -57,8 +51,8 @@ void BTree<T>::print2D()const
     std::cout << "-----------------------------------------------\n";
 }
 
-template<class T>
-void BTree<T>::dealloc(Node *root)
+template <class T>
+void BTree<T>::dealloc(Node* root)
 {
     if(root == nullptr) return;
 
@@ -67,16 +61,16 @@ void BTree<T>::dealloc(Node *root)
     delete root;
 }
 
-template<class T>
-BTree<T>::BTree():root(nullptr) {}
+template <class T>
+BTree<T>::BTree() : root(nullptr) {}
 
-template<class T>
-BTree<T>::BTree(const BTree& other) { copy(other); }
+template <class T>
+BTree<T>::BTree(const BTree& other) { copy_rec(root, other.root); }
 
-template<class T>
+template <class T>
 BTree<T>::~BTree() { dealloc(root); }
 
-template<class T>
+template <class T>
 BTree<T>& BTree<T>::operator=(const BTree& other)
 {
     if(this != &other)
@@ -88,14 +82,14 @@ BTree<T>& BTree<T>::operator=(const BTree& other)
 }
 
 template <class T>
-Position<T> BTree<T>::root_position() { return Position<T>(root); }
+Position<T> BTree<T>::root_position(void) { return Position<T>(root); }
 
-template<class T>
-void BTree<T>::create() 
+template <class T>
+void BTree<T>::create(void) 
 {
-    Node *curr_node;
-    Node *new_node;
-    std::queue<Node *> nodes;
+    Node*curr_node;
+    Node*new_node;
+    std::queue<Node*> nodes;
 
     T value;
     std::cout << "Enter root value: " << std::flush;
@@ -130,8 +124,8 @@ void BTree<T>::create()
     std::cout << std::endl;
 }
 
-template<class T>
-void BTree<T>::create_rec(Node *&root, std::vector<T> vec, int start, int end)
+template <class T>
+void BTree<T>::create_rec(Node*& root, std::vector<T> vec, int start, int end)
 {
     if(start > end) { root = nullptr; return; }
 
@@ -142,11 +136,11 @@ void BTree<T>::create_rec(Node *&root, std::vector<T> vec, int start, int end)
     create_rec(root->right, vec, mid + 1, end);
 }
 
-template<class T>
+template <class T>
 void BTree<T>::create(std::vector<T> vec) { create_rec(root, vec, 0, vec.size() - 1); }
 
-template<class T>
-void BTree<T>::print_pre_order(const Node *root)const
+template <class T>
+void BTree<T>::print_pre_order(const Node* root) const
 {
     if(root == nullptr) return;
 
@@ -155,8 +149,8 @@ void BTree<T>::print_pre_order(const Node *root)const
     print_pre_order(root->right);
 }
 
-template<class T>
-void BTree<T>::print_in_order(const Node *root)const
+template <class T>
+void BTree<T>::print_in_order(const Node* root) const
 {
     if(root == nullptr) return;
 
@@ -165,8 +159,8 @@ void BTree<T>::print_in_order(const Node *root)const
     print_in_order(root->right);
 }
 
-template<class T>
-void BTree<T>::print_post_order(const Node *root)const
+template <class T>
+void BTree<T>::print_post_order(const Node* root) const
 {
     if(root == nullptr) return;
 
@@ -175,43 +169,43 @@ void BTree<T>::print_post_order(const Node *root)const
     std::cout << root->value << ' ';
 }
 
-template<class T>
-void BTree<T>::pre_order()const 
+template <class T>
+void BTree<T>::pre_order(void) const 
 { 
     std::cout << "Pre order traversal: ";
     print_pre_order(root); 
     std::cout << std::endl; 
 }
 
-template<class T>
-void BTree<T>::in_order()const 
+template <class T>
+void BTree<T>::in_order(void) const 
 { 
     std::cout << "In order traversal: ";
     print_in_order(root); 
     std::cout << std::endl; 
 }
 
-template<class T>
-void BTree<T>::post_order()const 
+template <class T>
+void BTree<T>::post_order(void) const 
 { 
     std::cout << "Post order traversal: ";
     print_post_order(root); 
     std::cout << std::endl; 
 }
 
-template<class T>
-int BTree<T>::calc_height(const Node *root)const
+template <class T>
+int BTree<T>::calc_height(const Node* root) const
 {
     if(root == nullptr) return -1;
 
     return 1 + std::max(calc_height(root->left), calc_height(root->right));
 }
 
-template<class T>
-int BTree<T>::height()const { return calc_height(root); }
+template <class T>
+int BTree<T>::height(void) const { return calc_height(root); }
 
-template<class T>
-void BTree<T>::print_v2(Node *root, int tabs)const
+template <class T>
+void BTree<T>::print_v2(Node* root, int tabs) const
 {
     if(root == nullptr) return;
 
@@ -225,8 +219,8 @@ void BTree<T>::print_v2(Node *root, int tabs)const
     print_v2(root->right, tabs);
 }
 
-template<class T>
-void BTree<T>::print2D_v2()const
+template <class T>
+void BTree<T>::print2D_v2(void) const
 {
     if(root == nullptr) return;
 

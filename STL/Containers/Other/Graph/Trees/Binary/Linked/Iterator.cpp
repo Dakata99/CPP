@@ -1,31 +1,31 @@
 #include "Iterator.h"
 #include <cassert>
 
-template<class T>
+template <class T>
 Iterator<T>::Iterator(Position<T> start, bool is_end)
 {
     if(!is_end && !start.empty())
     {
-        s.push(start);
+        st.push(start);
 
-        while(!st.top().left().empty()) s.push(st.top().left());
+        while(!st.top().left().empty()) st.push(st.top().left());
     }
 }
 
-template<class T>
-T Iterator<T>::operator*() const
+template <class T>
+T Iterator<T>::operator* (void) const
 {
     assert(!st.empty());
-    return s.top().get();
+    return st.top().get();
 }
 
-template<class T>
-Iterator<T>& Iterator<T>::operator++()
+template <class T>
+Iterator<T>& Iterator<T>::operator++ (void)
 {
 
 }
 
-template<class T>
+template <class T>
 bool Iterator<T>::operator!= (const Iterator&) const
 {
     return false;

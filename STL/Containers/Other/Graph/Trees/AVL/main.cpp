@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "AVL.h"
 #include "Position.h"
 #include "Iterator.h"
@@ -26,7 +27,6 @@ void run(void)
     t1.insert_rec(55);
     t1.insert_rec(33);
     t1.insert_rec(28);
-    
 
     t1.print2D();   
     t1.remove(28);

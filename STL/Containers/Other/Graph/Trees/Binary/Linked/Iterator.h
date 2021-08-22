@@ -1,9 +1,12 @@
-#pragma once
+#ifndef _ITERATOR_H_
+#define _ITERATOR_H_
+
 #include <stack>
+
 #include "BTree.h"
 #include "Position.h"
 
-template<class T>
+template <class T>
 class Iterator
 {
 private:
@@ -12,9 +15,11 @@ private:
 
 public:
     Iterator(Position<T>, bool);
-    T operator*() const;
-    Iterator& operator++();
-    bool operator!=(const Iterator&) const;
+    T operator* (void) const;
+    Iterator& operator++ (void);
+    bool operator!= (const Iterator&) const;
 };
 
 #include "Iterator.cpp"
+
+#endif

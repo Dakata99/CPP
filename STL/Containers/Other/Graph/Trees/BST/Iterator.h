@@ -1,7 +1,7 @@
 #pragma once
 #include "BST.h"
 
-template<class T>
+template <class T>
 class Iterator
 {
 private:
