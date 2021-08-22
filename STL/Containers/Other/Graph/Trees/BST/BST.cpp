@@ -91,6 +91,18 @@ BST<T>& BST<T>::operator= (const BST& other)
 }
 
 template <class T>
+void BST<T>::create(const std::vector<T>& vec)
+{
+    std::vector<T> tmp(vec);
+    std::sort(tmp.begin(), tmp.end());
+    
+    typename std::vector<T>::iterator it = std::unique (tmp.begin(), tmp.end());
+    tmp.resize(std::distance(tmp.begin(), it));
+
+    create_rec(this->root, tmp, 0, tmp.size() - 1);
+}
+
+template <class T>
 void BST<T>::create_rec(BTNode* &root, std::vector<T> vec, int start, int end)
 {
     if(start > end) { root = nullptr; return; }

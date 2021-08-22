@@ -1,13 +1,15 @@
-#include "DLList.h"
 #include <cassert>
 
 template<class T>
-DLList<T>::Node::Node(Node* _previous, const T _data, Node* _next):data(_data), previous(_previous), next(_next){}
+DLList<T>::Node::Node(Node* _previous, const T _data, Node* _next) : data(_data), previous(_previous), next(_next) {}
 
 template<class T>
 void DLList<T>::copy(const DLList<T>& other)
 {
     Node* iter = other.head;
+
+    if (iter == nullptr) return;
+
     Node* curr = new Node(nullptr, iter->data, nullptr);
     iter = iter->next;
     head = curr;
@@ -21,7 +23,7 @@ void DLList<T>::copy(const DLList<T>& other)
 }
 
 template<class T>
-void DLList<T>::clear()
+void DLList<T>::clear(void)
 {
     Node* curr = head, *save = nullptr;
     while (curr != nullptr)
@@ -34,22 +36,16 @@ void DLList<T>::clear()
 }
 
 template<class T>
-DLList<T>::DLList():head(nullptr), tail(nullptr){}
+DLList<T>::DLList(void) : head(nullptr), tail(nullptr) {}
 
 template<class T>
-DLList<T>::DLList(const DLList<T>& other):head(nullptr), tail(nullptr)
-{
-    copy(other);
-}
+DLList<T>::DLList(const DLList<T>& other) : head(nullptr), tail(nullptr) { copy(other); }
 
 template<class T>
-DLList<T>::~DLList()
-{
-    clear();
-}
+DLList<T>::~DLList(void) { clear(); }
 
 template<class T>
-DLList<T>& DLList<T>::operator=(const DLList<T>& other)
+DLList<T>& DLList<T>::operator= (const DLList<T>& other)
 {
     if (this != &other)
     {
@@ -60,20 +56,13 @@ DLList<T>& DLList<T>::operator=(const DLList<T>& other)
 }
 
 template<class T>
-bool DLList<T>::empty()const
-{
-    return head == nullptr; //&& tail == nullptr
-}
+bool DLList<T>::empty(void) const { return head == nullptr; } // && tail == nullptr
 
 template<class T>
-const T& DLList<T>::front()const
-{
-    assert(head != nullptr);    
-    return head->data;
-}
+const T& DLList<T>::front(void) const { assert(head != nullptr); return head->data; }
 
 template<class T>
-const T& DLList<T>::back()const
+const T& DLList<T>::back(void) const
 {
     assert(tail != nullptr);
     return tail->data;
@@ -95,7 +84,7 @@ void DLList<T>::push_front(const T& element)
 }
 
 template<class T>
-void DLList<T>::pop_front()
+void DLList<T>::pop_front(void)
 {
     assert(head != nullptr);
 
@@ -125,12 +114,13 @@ void DLList<T>::push_back(const T& element)
 }
 
 template<class T>
-void DLList<T>::pop_back()
+void DLList<T>::pop_back(void)
 {
     assert(tail != nullptr);
 
     Node* curr = tail;
     tail = tail->previous;
+    
     if(tail != nullptr)
         tail->next = nullptr;
     else
@@ -140,29 +130,21 @@ void DLList<T>::pop_back()
 }
 
 template<class T>
-void DLList<T>::print()const
+std::ostream& operator<< (std::ostream& os, const DLList<T>& list)
 {
-    if(head != nullptr && tail != nullptr)
+    DLList<T> tmp(list);
+
+    os << "[ ";
+    while (!tmp.empty())
     {
-        Node* curr = head;
-        std::cout << "[ ";
-        while (curr != tail->next)
-        {
-            std::cout << curr->data << " ";
-            curr = curr->next;
-        }
-        std::cout << "]\n";
+        os << tmp.front() << ' ';
+        tmp.pop_front();
     }
+    return os;
 }
 
 template<class T>
-Iterator<T> DLList<T>::begin()
-{
-    return Iterator<T>(head);
-}
+Iterator<T> DLList<T>::begin(void) { return Iterator<T>(head); }
 
 template<class T>
-Iterator<T> DLList<T>::end()
-{
-    return Iterator<T>(tail);
-}
+Iterator<T> DLList<T>::end(void) { return Iterator<T>(tail); }

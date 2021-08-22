@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "AVL.h"
-#include "Position.h"
-#include "Iterator.h"
+#include "../../../../../Iterators/Position.h"
+#include "../../../../../Iterators/Iterator.h"
 
 void run(void)
 {
@@ -41,7 +41,7 @@ void run(void)
 
 int main(void)
 {
-    run();
+    // run();
 
     return 0;
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DLLIST_H_
+#define _DLLIST_H_
 
 template<class T>
 class Iterator;
@@ -25,23 +26,25 @@ public:
     DLList(const DLList<T>&);
     ~DLList();
 
-    DLList& operator=(const DLList<T>&);
+    DLList& operator= (const DLList<T>&);
 
-    bool empty()const;
+    bool empty(void) const;
 
-    const T& front()const;
-    const T& back()const;
+    const T& front(void) const;
+    const T& back(void) const;
 
     void push_front(const T&);
-    void pop_front();
+    void pop_front(void);
     void push_back(const T&);
-    void pop_back();
+    void pop_back(void);
 
-    void print()const;
+    template<class E>
+    friend std::ostream& operator<< (std::ostream&, const DLList<E>&);
 
-    Iterator<T> begin();
-    Iterator<T> end();
+    Iterator<T> begin(void);
+    Iterator<T> end(void);
 };
 
 #include "DLList.cpp"
-#include "Iterator.cpp"
+
+#endif

@@ -1,20 +1,24 @@
-#pragma once
+#ifndef _ITERATOR_H_
+#define _ITERATOR_H_
 
 template<class T>
 class Iterator
 {
 private:
     typename SLList<T>::Node* iter;
+
 public:
     Iterator(typename SLList<T>::Node* = nullptr);
 
-    Iterator& operator++();
-    Iterator operator++(int);
+    Iterator& operator++ (void);
+    Iterator operator++ (int);
 
-    bool operator==(const Iterator<T>&)const;
-    bool operator!=(const Iterator<T>&)const;
+    bool operator== (const Iterator<T>&) const;
+    bool operator!= (const Iterator<T>&) const;
 
-    T& operator*()const;
+    const T& operator* (void) const;
 };
 
 #include "Iterator.cpp"
+
+#endif

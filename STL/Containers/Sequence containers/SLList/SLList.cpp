@@ -1,26 +1,30 @@
-#include "SLList.h"
 #include <cassert>
+#include <iostream>
 
 template<class T>
-SLList<T>::Node::Node(const T& _data, Node* _next):data(_data), next(_next){}
+SLList<T>::Node::Node(const T& _data, Node* _next) : data(_data), next(_next){}
 
 template<class T>
 void SLList<T>::copy(const SLList<T>& other)
 {
-    Node* otherCurr = other.head;
-    head = new Node(otherCurr->data, nullptr);
-    otherCurr = otherCurr->next;
+    Node* other_curr = other.head;
+    
+    if (other_curr == nullptr) return;
+    
+    head = new Node(other_curr->data, nullptr);
+    other_curr = other_curr->next;
     Node* curr = head;
-    while(otherCurr != nullptr)
+
+    while(other_curr != nullptr)
     {
-        curr->next = new Node(otherCurr->data, nullptr);
-        otherCurr = otherCurr->next;
+        curr->next = new Node(other_curr->data, nullptr);
+        other_curr = other_curr->next;
         curr = curr->next;
     }
 }
 
 template<class T>
-void SLList<T>::clear()
+void SLList<T>::clear(void)
 {
     Node* curr = head;
     while (head != nullptr)
@@ -32,16 +36,16 @@ void SLList<T>::clear()
 }
 
 template<class T>
-SLList<T>::SLList():head(nullptr){}
+SLList<T>::SLList() : head(nullptr){}
 
 template<class T>
-SLList<T>::SLList(const SLList<T>& other):head(nullptr) { copy(other); }
+SLList<T>::SLList(const SLList<T>& other) : head(nullptr) { copy(other); }
 
 template<class T>
 SLList<T>::~SLList() { clear(); }
 
 template<class T>
-SLList<T>& SLList<T>::operator=(const SLList<T>& other)
+SLList<T>& SLList<T>::operator= (const SLList<T>& other)
 {
     if (this != &other)
     {
@@ -52,17 +56,21 @@ SLList<T>& SLList<T>::operator=(const SLList<T>& other)
 }
 
 template<class T>
-bool SLList<T>::empty()const { return head == nullptr; }
+bool SLList<T>::empty(void) const { return head == nullptr; }
 
 template<class T>
 void SLList<T>::push_front(const T& element)
 {
     if(head == nullptr) head = new Node(element, nullptr);
-    else { Node* newNode = new Node(element, head); head = newNode; }
+    else
+    {
+        Node* new_node = new Node(element, head);
+        head = new_node;
+    }
 }
 
 template<class T>
-void SLList<T>::pop_front()
+void SLList<T>::pop_front(void)
 {
     assert(head != nullptr);
 
@@ -72,10 +80,10 @@ void SLList<T>::pop_front()
 }
 
 template<class T>
-const T& SLList<T>::front()const { return head->data; }
+const T& SLList<T>::front(void) const { assert(head != nullptr); return head->data; }
 
 template<class T>
-void SLList<T>::reverse()
+void SLList<T>::reverse(void)
 {
     if(head == nullptr) return;
 
@@ -90,21 +98,24 @@ void SLList<T>::reverse()
     head = curr;
 }
 
-template<class T>
-void SLList<T>::print()const
+template <class T>
+std::ostream& operator<< (std::ostream& os, const SLList<T>& list)
 {
-    Node* curr = head;
-    std::cout << "[ ";
-    while (curr != nullptr)
+    SLList<T> tmp(list);
+
+    os << "[ ";
+    while (!tmp.empty())
     {
-        std::cout << curr->data << ' ';
-        curr = curr->next;
+        os << tmp.front() << ' ';
+        tmp.pop_front();
     }
-    std::cout << "]\n";
+    os << "]\n";
+
+    return os;
 }
 
 template<class T>
-Iterator<T> SLList<T>::begin() { return Iterator<T>(head); }
+Iterator<T> SLList<T>::begin(void) { return Iterator<T>(head); }
 
 template<class T>
-Iterator<T> SLList<T>::end() { return Iterator<T>(); }
+Iterator<T> SLList<T>::end(void) { return Iterator<T>(); }

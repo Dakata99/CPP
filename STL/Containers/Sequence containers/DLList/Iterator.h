@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _ITERATOR_H_
+#define _ITERATOR_H_
+
 #include "DLList.h"
 
 template<class T>
@@ -9,13 +11,17 @@ private:
 public:
     Iterator(typename DLList<T>::Node* = nullptr);
 
-    Iterator<T>& operator++();
-    Iterator<T> operator++(int);
-    Iterator<T>& operator--();
-    Iterator<T> operator--(int);
+    Iterator<T>& operator++ (void);
+    Iterator<T> operator++ (int);
+    Iterator<T>& operator-- (void);
+    Iterator<T> operator-- (int);
 
-    bool operator==(const Iterator<T>&)const;
-    bool operator!=(const Iterator<T>&)const;
+    bool operator== (const Iterator<T>&)const;
+    bool operator!= (const Iterator<T>&) const;
 
-    T& operator*()const;
+    T& operator* (void) const;
 };
+
+#include "Iterator.cpp"
+
+#endif

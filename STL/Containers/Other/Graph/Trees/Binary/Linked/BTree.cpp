@@ -125,7 +125,7 @@ void BTree<T>::create(void)
 }
 
 template <class T>
-void BTree<T>::create_rec(Node*& root, std::vector<T> vec, int start, int end)
+void BTree<T>::create_rec(Node*& root, const std::vector<T>& vec, int start, int end)
 {
     if(start > end) { root = nullptr; return; }
 
@@ -137,7 +137,7 @@ void BTree<T>::create_rec(Node*& root, std::vector<T> vec, int start, int end)
 }
 
 template <class T>
-void BTree<T>::create(std::vector<T> vec) { create_rec(root, vec, 0, vec.size() - 1); }
+void BTree<T>::create(const std::vector<T>& vec) { create_rec(root, vec, 0, vec.size() - 1); }
 
 template <class T>
 void BTree<T>::print_pre_order(const Node* root) const

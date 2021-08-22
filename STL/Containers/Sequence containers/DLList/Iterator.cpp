@@ -1,4 +1,3 @@
-#include "Iterator.h"
 #include <cassert>
 
 template<class T>

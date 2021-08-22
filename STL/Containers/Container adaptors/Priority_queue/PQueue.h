@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _PQUEUE_H_
+#define _PQUEUE_H_
 
 #include <cassert>
 #include <iostream>
@@ -48,3 +49,4 @@ public:
 
 #include "PQueue.cpp"
 
+#endif

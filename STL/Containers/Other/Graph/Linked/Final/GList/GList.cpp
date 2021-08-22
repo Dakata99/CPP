@@ -13,12 +13,12 @@ NOTE:
 template<class Vertex, class Edge>
 void GList<Vertex, Edge>::print_weighted() const 
 {    
-    typedef typename std::map<Vertex, my_list>::iterator map_iterator;
+    typedef typename std::map<Vertex, glist>::iterator map_iterator;
     for (auto it = set.begin(); it != set.end(); it++)
     {
         std::cout << "Vertex (" << it->first << ") ---> Childs: [ ";
         
-        my_list l = set.at(it->first);
+        glist l = set.at(it->first);
         list_iterator iter = l.begin();
         
         for(; iter != l.end(); iter++)
@@ -35,7 +35,7 @@ void GList<Vertex, Edge>::print_non_weighted() const
     {
         std::cout << "Vertex (" << it->first << ") ---> Childs: [ ";
         
-        my_list l = set.at(it->first);
+        glist l = set.at(it->first);
         list_iterator iter = l.begin();
         
         for(; iter != l.end(); iter++)
@@ -82,7 +82,7 @@ void GList<Vertex, Edge>::add_vertex(const Vertex& vertex)
 {
     if(has_vertex(vertex)) return;
 
-    set.insert( {vertex, my_list()} );
+    set.insert( {vertex, glist()} );
 }
 
 template<class Vertex, class Edge>
@@ -151,7 +151,7 @@ bool GList<Vertex, Edge>::has_edge(const Vertex& v1, const Vertex& v2) const
 {
     if(!(has_vertex(v1) && has_vertex(v2))) return false;
 
-    my_list l = set.at(v1);
+    glist l = set.at(v1);
 
     if(this->oriented)
     {
@@ -223,7 +223,7 @@ bool GList<Vertex, Edge>::has_way(const Vertex& v1, const Vertex& v2) const
 
         bool has_unvisited = false;
 
-        my_list list = set.at(current);
+        glist list = set.at(current);
         Vertex next; /* TODO: to choose random vertex, not the first or last one */
         for(list_iterator it = list.begin(); it != list.end(); it++) /* check if there is a way */
             if(visited[it->first] == white)
@@ -261,7 +261,7 @@ std::list<Vertex> GList<Vertex, Edge>::get_predecessors(const Vertex& vertex) co
     std::list<Vertex> result;
     for(auto it = set.begin(); it != set.end(); it++)
     {
-        my_list list = it->second;
+        glist list = it->second;
         for(list_iterator iter = list.begin(); iter != list.end(); iter++)
             if(iter->first == vertex) result.push_back(it->first);
     }
@@ -409,7 +409,7 @@ void GList<Vertex, Edge>::DFS(const Vertex& vertex) const
 
         bool has_unvisited = false;
 
-        my_list list = set.at(current);
+        glist list = set.at(current);
         Vertex next; /* TODO: to choose random vertex, not the first or last one */
         for(list_iterator it = list.begin(); it != list.end(); it++) /* check if there is a way */
         {

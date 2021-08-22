@@ -1,7 +1,10 @@
 #define DOCTEST_CONFIG_IMPLEMENT
 
 #include "doctest.h"
-
+#include "BST.h"
+#include "../../../../../Iterators/Position.h"
+#include "../../../../../Iterators/Iterator.h"
+#include "../test_utils.hpp"
 #include "test.h"
 
 int main(void)

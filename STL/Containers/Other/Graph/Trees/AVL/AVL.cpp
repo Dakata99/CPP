@@ -15,21 +15,6 @@ AVL<T>& AVL<T>::operator= (const AVL& other)
 }
 
 template <class T>
-void AVL<T>::create_rec(BTNode*& root, const std::vector<T>& vec, size_t start, size_t end)
-{
-    if(start > end) { root = nullptr; return; }
-
-    size_t mid = (start + end) / 2;
-    root = new BTNode(nullptr, vec[mid], nullptr);
-
-    create_rec(root->left, vec, start, mid - 1);
-    create_rec(root->right, vec, mid + 1, end);
-}
-
-template <class T>
-void AVL<T>::create(const std::vector<T>& vec) { create_rec(this->root, vec, 0, vec.size() - 1); }
-
-template <class T>
 bool AVL<T>::search_iter(const T& element) const
 {
     if(this->root == nullptr) return false;
@@ -76,7 +61,7 @@ typename BST<T>::Node* AVL<T>::remove_rec(BTNode* root, const T& element)
 
 template <class T>
 void AVL<T>::remove(const T& element) 
-{ if(!search_element(this->root, element)) return; this->root = remove_rec(this->root, element); }
+{ if(!this->search_element(this->root, element)) return; this->root = remove_rec(this->root, element); }
 
 template <class T>
 typename BST<T>::Node* AVL<T>::LL_rotation(BTNode* root)

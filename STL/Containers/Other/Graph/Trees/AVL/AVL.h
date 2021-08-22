@@ -22,7 +22,6 @@ private:
     typedef typename BST<T>::Node BTNode;
 
 private: /* other helper functions */
-    void create_rec(BTNode*&, const std::vector<T>&, size_t, size_t);
     BTNode* insert_rec(BTNode*, const T&);
     BTNode* remove_rec(BTNode*, const T&);
     BTNode* find_min(BTNode*);
@@ -40,11 +39,12 @@ public:
 
     AVL& operator=(const AVL&);
 
-    void create(const std::vector<T>&);
     void insert_rec(const T&);
     void insert_iter(const T&);
+
     bool search_rec(const T&) const;
     bool search_iter(const T&) const;
+
     void remove(const T&);
 };
 

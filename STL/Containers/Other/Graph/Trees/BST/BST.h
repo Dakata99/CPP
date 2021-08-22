@@ -5,6 +5,7 @@
 #include <cassert>
 #include <queue>
 #include <cmath>
+#include <algorithm>
 
 #include "../Binary/Linked/BTree.h"
 
@@ -32,10 +33,14 @@ public:
 
     BST& operator= (const BST&);
 
+    void create(const std::vector<T>&) override;
+
     void insert_rec(const T&);
     void insert_iter(const T&);
+
     bool search_rec(const T&) const;
     bool search_iter(const T&) const;
+
     void remove(const T&);
 };
 

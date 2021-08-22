@@ -1,11 +1,10 @@
-#include "Iterator.h"
 #include <cassert>
 
 template<class T>
-Iterator<T>::Iterator(typename SLList<T>::Node* ptr):iter(ptr){}
+Iterator<T>::Iterator(typename SLList<T>::Node* ptr) : iter(ptr) {}
 
 template<class T>
-Iterator<T>& Iterator<T>::operator++()
+Iterator<T>& Iterator<T>::operator++ (void)
 {
     assert(iter != nullptr);
 
@@ -23,10 +22,10 @@ Iterator<T> Iterator<T>::operator++(int)
 }
 
 template<class T>
-bool Iterator<T>::operator==(const Iterator<T>& other)const { return iter == other.iter; }
+bool Iterator<T>::operator== (const Iterator<T>& other)const { return iter == other.iter; }
 
 template<class T>
-bool Iterator<T>::operator!=(const Iterator<T>& other)const { return iter != other.iter; }
+bool Iterator<T>::operator!= (const Iterator<T>& other)const { return iter != other.iter; }
 
 template<class T>
-T& Iterator<T>::operator*()const { return iter->data; }
+const T& Iterator<T>::operator*(void) const { return iter->data; }

@@ -1,5 +1,3 @@
-#include "Vector.h"
-
 //private funcs
 template<class T>
 void Vector<T>::copy(const Vector<T>& other)
@@ -12,10 +10,10 @@ void Vector<T>::copy(const Vector<T>& other)
 }
 
 template<class T>
-void Vector<T>::del() { delete [] data; }
+void Vector<T>::del(void) { delete [] data; }
 
 template<class T>
-void Vector<T>::init(const size_t num, const T& val)
+void Vector<T>::init(const size_t& num, const T& val)
 {
     size = capacity = num;
     data = new T[size];
@@ -25,13 +23,13 @@ void Vector<T>::init(const size_t num, const T& val)
 
 //public funcs
 template<class T>
-Vector<T>::Vector():data(nullptr), size(0), capacity(0) {}
+Vector<T>::Vector() : data(nullptr), size(0), capacity(0) {}
 
 template<class T>
-Vector<T>::Vector(const size_t size) { init(size, T()); }
+Vector<T>::Vector(const size_t& size) { init(size, T()); }
 
 template<class T>
-Vector<T>::Vector(const size_t size, const T& val) { init(size, val); }
+Vector<T>::Vector(const size_t& size, const T& val) { init(size, val); }
 
 template<class T>
 Vector<T>::Vector(const Vector<T>& other) { copy(other); }
@@ -50,7 +48,7 @@ template<class T>
 Vector<T>::~Vector() { del(); }
 
 template<class T>
-Vector<T>& Vector<T>::operator=(const Vector<T>& other)
+Vector<T>& Vector<T>::operator= (const Vector<T>& other)
 {
     if (this != &other)
     {
@@ -93,7 +91,7 @@ template<class T>
 size_t Vector<T>::get_max_size(void) const { return pow(2, 64) / sizeof(T) - 1; }
 
 template<class T>
-void Vector<T>::resize(size_t new_size, T& value)
+void Vector<T>::resize(const size_t& new_size, T& value)
 {
     const T* temp = new T[new_size];
     for (size_t i = 0; i < size; i++) temp[i] = data[i];
@@ -115,23 +113,23 @@ template<class T>
 bool Vector<T>::empty(void) const { return size == 0; }
 
 template<class T>
-void Vector<T>::reserve(size_t new_size) {}
+void Vector<T>::reserve(const size_t& new_size) {}
 
 template<class T>
 void Vector<T>::shrink_to_fit(void) {}
 
 //element access
 template<class T>
-T& Vector<T>::operator[](size_t index) const
+const T& Vector<T>::operator[] (size_t index) const
 {
-    assert(index >= 0 && index <= size - 1);
+    assert(data != nullptr && index >= 0 && index <= size - 1);
     return data[index];
 }
 
 template<class T>
-T& Vector<T>::at(size_t index) const
+const T& Vector<T>::at(size_t index) const
 {
-    assert(index >= 0 && index <= size - 1);
+    assert(data != nullptr && index >= 0 && index <= size - 1);
     return data[index];
 }
 
@@ -211,7 +209,7 @@ void Vector<T>::emplace_back(void) {}
 
 //non-member function overloads
 template<class T>
-bool Vector<T>::operator==(const Vector<T>& other) const
+bool Vector<T>::operator== (const Vector<T>& other) const
 {
     assert(size == other.size());
     
@@ -222,26 +220,26 @@ bool Vector<T>::operator==(const Vector<T>& other) const
 }
 
 template<class T>
-bool Vector<T>::operator!=(const Vector<T>& other) const { return !(*this == other); }
+bool Vector<T>::operator!= (const Vector<T>& other) const { return !(*this == other); }
 
 template<class T>
-bool Vector<T>::operator>=(const Vector<T>& other) const {  return false; }
+bool Vector<T>::operator>= (const Vector<T>& other) const {  return false; }
 
 template<class T>
-bool Vector<T>::operator>(const Vector<T>& other) const { return false; }
+bool Vector<T>::operator> (const Vector<T>& other) const { return false; }
 
 template<class T>
-bool Vector<T>::operator<=(const Vector<T>& other) const { return false; }
+bool Vector<T>::operator<= (const Vector<T>& other) const { return false; }
 
 template<class T>
-bool Vector<T>::operator<(const Vector<T>& other) const { return false; }
+bool Vector<T>::operator< (const Vector<T>& other) const { return false; }
 
 template<class T>
 void swap(Vector<T>& x, Vector<T>& y) {}
 
 //printing funcs
 template<class T>
-std::ostream& operator<<(std::ostream& os, const Vector<T>& vector)
+std::ostream& operator<< (std::ostream& os, const Vector<T>& vector)
 {
     std::cout << "( ";
     
@@ -251,4 +249,3 @@ std::ostream& operator<<(std::ostream& os, const Vector<T>& vector)
 
     return os;
 }
-

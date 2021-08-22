@@ -1,11 +1,11 @@
-#include "Queue.h"
-
 template <class T>
 void Queue<T>::clear(void) { delete [] data; }
 
 template <class T>
 void Queue<T>::copy(const Queue<T>& other)
 {
+	if (other.size == 0) return;
+
 	size = other.size;
 	max_size = other.max_size;
 	data = new T[size];
@@ -14,18 +14,13 @@ void Queue<T>::copy(const Queue<T>& other)
 }
 
 template <class T>
-Queue<T>::Queue()
-{
-	size = 0;
-	max_size = 1;
-	data = new T[max_size];
-}
+Queue<T>::Queue() : size(0), max_size(1) { data = new T[max_size]; }
 
 template <class T>
-Queue<T>::Queue(const Queue<T>& other) { copy(other); }
+Queue<T>::Queue(const Queue<T>& other) : size(0), max_size(1) { copy(other); }
 
 template <class T>
-Queue<T>& Queue<T>::operator=(const Queue<T>& other)
+Queue<T>& Queue<T>::operator= (const Queue<T>& other)
 {
 	if (this != &other)
 	{
@@ -39,7 +34,7 @@ template <class T>
 bool Queue<T>::empty(void) const noexcept { return size == 0; }
 
 template <class T>
-const size_t Queue<T>::size(void) const noexcept { return size; }
+const size_t Queue<T>::get_size(void) const noexcept { return size; }
 
 template <class T>
 const T& Queue<T>::front(void) const 

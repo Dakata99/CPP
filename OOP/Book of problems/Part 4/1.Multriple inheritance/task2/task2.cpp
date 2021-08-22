@@ -5,6 +5,7 @@ class First
 private:
     int n;
     double x;
+
 public:
     First(int a = 3)
     {
@@ -12,6 +13,7 @@ public:
         x = -5.5;
         std::cout << "First: " << n << ", " << x << std::endl;
     }
+    
     First(const First& p)
     {
         n = p.n;
@@ -19,6 +21,7 @@ public:
         std::cout << "First.n: " << n << std::endl;
         std::cout << "First.x: " << x << std::endl;
     }
+    
     First& operator=(const First& p)
     {
         if (this != &p)
@@ -37,6 +40,7 @@ class Second
 private:
     int n;
     double x;
+    
 public:
     Second(double b = 2)
     {
@@ -51,6 +55,7 @@ class Third
 private:
     int n;
     double x;
+    
 public:
     Third(double b = 1)
     {
@@ -67,17 +72,19 @@ public:
     }
 };
 
-class Fourth:public Second, private First, protected Third
+class Fourth : public Second, First, protected Third
 {
 private:
     int n, m;
+    
 public:
-    Fourth(int x = 3, int y = 1, int z = 2):First(x), Second(y), Third(z)
+    Fourth(int x = 3, int y = 1, int z = 2) : First(x), Second(y), Third(z)
     {
         n = z;
         m = x - y;
         std::cout << "Fourth: " << n << ", " << m << std::endl;
     }
+    
     Fourth& operator=(const Fourth& p)
     {
         if (this != &p)
@@ -93,8 +100,29 @@ public:
 int main()
 {
     Fourth x, y(3, 7, 2), z;
-    Fourth t = x;
-    z = y;
+    //Fourth t = x;
+    //z = y;
+    
+    /*
+    For obj-x:
+    	Second: 7, 1
+    	First: 3, -5.5
+    	Third: 3, 2
+    	Fourth: 2, 2
+    	
+    For obj-y:
+    	Second: 7, 7
+    	First: 3, -5.5
+    	Third: 3, 2
+    	Fourth: 2, -4
+    	
+    For obj-z:
+    	Second: 7, 1
+    	First: 3, -5.5
+    	Third: 3, 2
+    	Fourth: 2, 2
+    	
+    */
 
     return 0;
 }

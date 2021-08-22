@@ -1,29 +1,55 @@
-#include "Stack.h"
 #include <cassert>
+#include <vector>
+
+template<class T>
+Stack<T>::StackBox::StackBox(const T& _data, typename Stack<T>::StackBox* _next) : data(_data), next(_next) {} 
 
 template<class T>
 void Stack<T>::copy(const Stack<T>& other)
 {
-    StackBox* temp = other.topPtr;
+    StackBox* other_top = other.top_ptr;
+
+    if (other_top == nullptr) return;
+
+    std::vector<T> values;
+    while (other_top != nullptr)
+    {
+        values.push_back(other_top->data);
+        other_top = other_top->next;
+    }
+
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        StackBox* new_box = new StackBox(values[i], top_ptr);
+        top_ptr = new_box;
+    }
 }
 
 template<class T>
-Stack<T>::Stack():topPtr(nullptr){}
-
-template<class T>
-Stack<T>::Stack(const Stack<T>& other)
+void Stack<T>::clear(void)
 {
-    copy(other);
+    if (top_ptr == nullptr) return;
+
+    StackBox* tmp = top_ptr;
+    top_ptr = top_ptr->next;
+    delete tmp;
 }
 
 template<class T>
-Stack<T>::~Stack(){}
+Stack<T>::Stack() : top_ptr(nullptr) {}
 
 template<class T>
-Stack<T>& Stack<T>::operator=(const Stack<T>& other)
+Stack<T>::Stack(const Stack<T>& other) : top_ptr(nullptr) { copy(other); }
+
+template<class T>
+Stack<T>::~Stack() {}
+
+template<class T>
+Stack<T>& Stack<T>::operator= (const Stack<T>& other)
 {
     if (this != &other)
     {
+        clear();
         copy(other);
     }
     return *this;
@@ -32,40 +58,43 @@ Stack<T>& Stack<T>::operator=(const Stack<T>& other)
 template<class T>
 void Stack<T>::push(const T& element)
 {
-    StackBox* newEl = new StackBox(element, nullptr);
-    newEl->next = topPtr;
-    topPtr = newEl;   
+    StackBox* new_el = new StackBox(element, nullptr);
+    new_el->next = top_ptr;
+    top_ptr = new_el;   
 }
 
 template<class T>
-void Stack<T>::pop()
+void Stack<T>::pop(void)
 {
-    if(topPtr != nullptr)
-        topPtr = topPtr->next;
+    if (top_ptr == nullptr) return;
+
+    StackBox* tmp = top_ptr;
+    top_ptr = top_ptr->next;
+    delete tmp;
 }
 
 template<class T>
-bool Stack<T>::empty()const
+bool Stack<T>::empty(void) const { return top_ptr == nullptr; }
+
+template<class T>
+const T& Stack<T>::top(void) const
 {
-    return topPtr == nullptr;
+    assert(top_ptr != nullptr);
+    return top_ptr->data;
 }
 
 template<class T>
-const T& Stack<T>::top()const
+std::ostream& operator<< (std::ostream& os, const Stack<T>& st)
 {
-    assert(topPtr != nullptr);
-    return topPtr->data;
-}
+    Stack<T> tmp(st);
 
-template<class T>
-void Stack<T>::print()const
-{
-    StackBox* curr = topPtr;
-    std::cout << "[ ";
-    while (curr != nullptr)
+    os << "[ ";
+    while (!tmp.empty())
     {
-        std::cout << curr->data << " ";
-        curr = curr->next;
+        os << tmp.top() << ' ';
+        tmp.pop();
     }
-    std::cout << "]\n";
+    os << "]\n";
+
+    return os;
 }

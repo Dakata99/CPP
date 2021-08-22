@@ -1,5 +1,5 @@
-#ifndef _TESTS_H_
-#define _TESTS_H_
+#ifndef _ITERATOR_H_
+#define _ITERATOR_H_
 
 #include <cassert>
 
@@ -12,21 +12,23 @@ private:
 public:
     Iterator(T* = nullptr);
     
-    Iterator& operator++();
-    Iterator& operator--();
-    Iterator& operator++(int);
-    Iterator& operator--(int);
+    Iterator& operator++ (void);
+    Iterator& operator-- (void);
+    Iterator& operator++ (int);
+    Iterator& operator-- (int);
 
     template<class E>
-    friend bool operator==(const Iterator<E>&, const Iterator<E>&);
+    friend bool operator== (const Iterator<E>&, const Iterator<E>&);
     
     template<class E>
-    friend bool operator!=(const Iterator<E>&, const Iterator<E>&);
+    friend bool operator!= (const Iterator<E>&, const Iterator<E>&);
 
-    bool operator==(const Iterator& other);
-    bool operator!=(const Iterator& other);
-    T& operator*() const;
+    bool operator== (const Iterator&);
+    bool operator!= (const Iterator&);
+    T& operator* (void) const;
 };
+
+#include "Iterator.cpp"
 
 #endif
 

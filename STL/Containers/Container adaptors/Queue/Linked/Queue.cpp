@@ -1,5 +1,3 @@
-#include "Queue.h"
-
 template <class T>
 Queue<T>::Node::Node(const T& elem, Node* _next):data(elem), next(_next) {}
 
@@ -41,16 +39,16 @@ void Queue<T>::copy(const Queue<T>& other)
 }
 
 template <class T>
-Queue<T>::Queue():head(nullptr), tail(nullptr) {}
+Queue<T>::Queue() : head(nullptr), tail(nullptr) {}
 
 template <class T>
-Queue<T>::Queue(const Queue<T>& other) { copy(other); }
+Queue<T>::Queue(const Queue<T>& other) : head(nullptr), tail(nullptr) { copy(other); }
 
 template <class T>
 Queue<T>::~Queue() { clear(); }
 
 template <class T>
-Queue<T>& Queue<T>::operator=(const Queue<T>& other)
+Queue<T>& Queue<T>::operator= (const Queue<T>& other)
 {
 	if (this != &other)
 	{
@@ -126,7 +124,7 @@ void Queue<T>::swap(Queue<T>& other)
 
 /* relational operators */
 template <class T>
-bool Queue<T>::operator==(const Queue<T>& other) const
+bool Queue<T>::operator== (const Queue<T>& other) const
 {
 	Queue<T> lhs(*this), rhs(other);
 	
@@ -144,7 +142,7 @@ bool Queue<T>::operator==(const Queue<T>& other) const
 }
 
 template <class T>
-bool Queue<T>::operator!=(const Queue<T>& other) const { return !((*this) == other); }
+bool Queue<T>::operator!= (const Queue<T>& other) const { return !((*this) == other); }
 
 template <class T>
 void swap(Queue<T>& lhs, Queue<T>& rhs) { lhs.swap(rhs); }
@@ -164,5 +162,3 @@ std::ostream& operator<<(std::ostream& os, const Queue<T>& q)
 
 	return os;
 }
-
-

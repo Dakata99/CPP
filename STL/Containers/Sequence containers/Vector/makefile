@@ -1,14 +1,30 @@
 CPP = g++
-COMPILE = $(CPP) -c
-CPPFLAGS = -I.
+CPPFLAGS = -I .
 
-%.o: %.cpp 
+SOURCES = $(wildcard *.cpp)
+HEADERS = $(wildcard *.h)
+OBJS := main.o
+
+default: all
+
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $<
 
-main: main.o Vector.o Iterator.o Tests.o
-	$(CPP) $(CPPFLAGS) main.o Vector.o Iterator.o Tests.o -o a.out
- 
-all: main clean
+main: $(OBJS)
+	$(CPP) $(CPPFLAGS) $(OBJS) -o main
+	./main
+
+test: 
+	$(CPP) $(CPPFLAGS) tests.cpp -o test
+	./test
+
+all: main test clean
+	rm -f main test
 
 clean:
-	rm *.o
+	rm -f *.o
+
+print_files:
+	@echo $(SOURCES)
+	@echo $(HEADERS)
+	@echo $(OBJS)

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _QUEUE_H_
+#define _QUEUE_H_
 
 #include <cassert>
 #include <iostream>
@@ -26,7 +27,7 @@ public:
 	Queue(const Queue<T>&);
 	~Queue();
 	
-	Queue<T>& operator=(const Queue<T>&);
+	Queue<T>& operator= (const Queue<T>&);
 	
 	/* */
 	bool empty(void) const;
@@ -39,8 +40,8 @@ public:
 	void swap(Queue<T>&);
 	
 	/* relational operators */
-	bool operator==(const Queue<T>&) const;
-	bool operator!=(const Queue<T>&) const;
+	bool operator== (const Queue<T>&) const;
+	bool operator!= (const Queue<T>&) const;
 	/* TODO: operators for <=, <, >=, > */
 	
 	/* */
@@ -49,6 +50,9 @@ public:
 	
 	/* */
 	template<class E>
-	friend std::ostream& operator<<(std::ostream&, const Queue<T>&);
+	friend std::ostream& operator<< (std::ostream&, const Queue<T>&);
 };
 
+#include "Queue.cpp"
+
+#endif

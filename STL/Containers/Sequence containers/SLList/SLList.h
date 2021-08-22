@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _SLLIST_H_
+#define _SLLIST_H_
 
 template<class T>
 class Iterator;
@@ -19,26 +20,30 @@ private:
     Node *head;
 private:
     void copy(const SLList<T>&);
-    void clear();
+    void clear(void);
+
 public:
     SLList();
     SLList(const SLList<T>&);
     ~SLList();
 
-    SLList& operator=(const SLList<T>&);
+    SLList& operator= (const SLList<T>&);
 
-    bool empty()const;
+    bool empty(void) const;
 
     void push_front(const T&);
-    void pop_front();
+    void pop_front(void);
 
-    const T& front()const;
-    void reverse();
+    const T& front(void) const;
+    void reverse(void);
 
-    void print()const;
+    template <class E>
+    friend std::ostream& operator<< (std::ostream&, const SLList<E>&);
 
-    Iterator<T> begin();
-    Iterator<T> end();
+    Iterator<T> begin(void);
+    Iterator<T> end(void);
 };
 
 #include "SLList.cpp"
+
+#endif

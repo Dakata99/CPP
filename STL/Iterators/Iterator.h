@@ -1,19 +1,23 @@
 #ifndef _ITERATOR_H_
 #define _ITERATOR_H_
 
-#include <cassert>
+#include <stack>
+
+#include "../Containers/Other/Graph/Trees/Binary/Linked/BTree.h"
+#include "Position.h"
 
 template <class T>
 class Iterator
 {
 private:
-    T* ptr;
+    friend Position<T>;
+    std::stack<Position<T>> st;  
 
 public:
-    Iterator(T* = nullptr);
-
-    const T& operator* (void) const;
+    Iterator(Position<T>, bool);
+    T operator* (void) const;
     Iterator& operator++ (void);
+    bool operator!= (const Iterator&) const;
 };
 
 #include "Iterator.cpp"

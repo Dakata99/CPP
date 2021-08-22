@@ -2,9 +2,9 @@
 
 #include "doctest.h"
 #include "BTree.h"
-#include "Position.h"
-#include "Iterator.h"
-#include "test_utils.hpp"
+#include "../../../../../../Iterators/Position.h"
+#include "../../../../../../Iterators/Iterator.h"
+#include "../../test_utils.hpp"
 #include "test.h"
 
 int main(void)

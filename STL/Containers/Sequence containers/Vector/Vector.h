@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _VECTOR_H_
+#define _VECTOR_H_
+
 #include <iostream>
 #include <cassert>
 #include <cmath>
@@ -16,21 +18,21 @@ private:
 
 private:
     void copy(const Vector&);
-    void del();
-    void init(const size_t, const T&);
+    void del(void);
+    void init(const size_t&, const T&);
 
 public:
-//Constructors
+// Constructors
     Vector();
-    Vector(const size_t);
-    Vector(const size_t, const T&);
+    Vector(const size_t&);
+    Vector(const size_t&, const T&);
     Vector(const Vector&);
     Vector(const Iterator<T>&, const Iterator<T>&);
     ~Vector();
     
-    Vector& operator=(const Vector&);
+    Vector& operator= (const Vector&);
 
-//Iterators
+// Iterators
     Iterator<T> begin(void);
     Iterator<T> end(void);
     Iterator<T> rbegin(void);
@@ -40,23 +42,23 @@ public:
     Iterator<T> crbegin(void) const;
     Iterator<T> crend(void) const;
 
-//capacity
+// capacity
     size_t get_size(void) const;
     size_t get_max_size(void) const;
-    void resize(size_t, T& = T());
+    void resize(const size_t&, T& = T());
     size_t capacity_vec(void) const;
     bool empty(void) const;
-    void reserve(size_t);
+    void reserve(const size_t&);
     void shrink_to_fit(void);
 
-//element access
-    T& operator[](size_t) const;
-    T& at(size_t) const;
+// element access
+    const T& operator[] (size_t) const;
+    const T& at(size_t) const;
     T& front(void) const;
     T& back(void) const;
     T* get_data(void);
 
-//modifiers
+// modifiers
     void assign(size_t, const T&);
     void push_back(const T&);
     void pop_back(void);
@@ -67,21 +69,24 @@ public:
     void emplace(void);
     void emplace_back(void);
 
-//non-member function overloads
-    bool operator==(const Vector&) const;
-    bool operator!=(const Vector&) const;
+// non-member function overloads
+    bool operator== (const Vector&) const;
+    bool operator!= (const Vector&) const;
     
-    bool operator>=(const Vector&) const;
-    bool operator>(const Vector&) const;
+    bool operator>= (const Vector&) const;
+    bool operator> (const Vector&) const;
     
-    bool operator<=(const Vector&) const;
-    bool operator<(const Vector&) const;
+    bool operator<= (const Vector&) const;
+    bool operator< (const Vector&) const;
     
     template<class E>
     friend void swap(Vector<E>&, Vector<E>&);
 
-//printing funcs
+// printing funcs
     template<class E>
-    friend std::ostream& operator<<(std::ostream&, const Vector<E>&);
+    friend std::ostream& operator<< (std::ostream&, const Vector<E>&);
 };
 
+#include "Vector.cpp"
+
+#endif

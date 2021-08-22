@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GLIST_H_
+#define _GLIST_H_
+
 #include "../Graph.h"
 #include <vector>
 #include <list>
@@ -12,13 +14,13 @@ template<class Vertex, class Edge>
 class GList : public Graph<Vertex, Edge>
 {
 private:
-    typedef typename std::pair<Vertex, Edge> my_pair; /* pair of vertex and edge value */
-    typedef typename std::list<my_pair> my_list; /* list of pairs */
+    typedef typename std::pair<Vertex, Edge> gpair; /* pair of vertex and edge value */
+    typedef typename std::list<gpair> glist; /* list of pairs */
 
-    std::map<Vertex, my_list> set;
+    std::map<Vertex, glist> set;
 
-    typedef typename std::list<my_pair>::iterator list_iterator;
-    typedef typename std::map<Vertex, my_list>::iterator map_iterator;
+    typedef typename std::list<gpair>::iterator list_iterator;
+    typedef typename std::map<Vertex, glist>::iterator map_iterator;
 
 private:
 /* additional helper functions */
@@ -70,3 +72,5 @@ public:
 };
 
 #include "GList.cpp"
+
+#endif

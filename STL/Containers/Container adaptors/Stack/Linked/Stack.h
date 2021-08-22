@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _STACK_H_
+#define _STACK_H_
 
 template<class T>
 class Stack
@@ -8,25 +9,31 @@ private:
     {
         T data;
         StackBox* next;
-        StackBox(const T& _data, StackBox* _next):data(_data), next(_next){}
+        StackBox(const T& = T(), StackBox* = nullptr);
     };
 
-    StackBox* topPtr; 
+    StackBox* top_ptr;
+
 private:
     void copy(const Stack<T>&);
+    void clear(void);
+
 public:
     Stack();
     Stack(const Stack<T>&);
     ~Stack();
 
-    Stack& operator=(const Stack<T>&);
+    Stack& operator= (const Stack<T>&);
 
     void push(const T&);
-    void pop();
-    bool empty()const;
-    const T& top()const;
+    void pop(void);
+    bool empty(void) const;
+    const T& top(void) const;
 
-    void print()const;
+    template<class E>
+    friend std::ostream& operator<< (std::ostream&, const Stack<T>&);
 };
 
 #include "Stack.cpp"
+
+#endif

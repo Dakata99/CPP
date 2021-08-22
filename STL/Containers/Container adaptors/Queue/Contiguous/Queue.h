@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _QUEUE_H_
+#define _QUEUE_H_
+
 #include <cassert>
 
 template <class T>
@@ -20,7 +22,7 @@ public:
 	Queue<T>& operator= (const Queue<T>&);
 	
 	bool empty(void) const noexcept;
-	const size_t size(void) const noexcept; 
+	const size_t get_size(void) const noexcept; 
 	const T& front(void) const;
 	const T& back(void) const;
 	void push(const T&);
@@ -33,5 +35,6 @@ public:
 	friend void swap(Queue<T>&, Queue<T>&);
 };
 
-#include "Queue.h"
+#include "Queue.cpp"
 
+#endif

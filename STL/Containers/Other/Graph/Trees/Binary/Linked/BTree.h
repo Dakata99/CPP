@@ -40,7 +40,7 @@ protected: /* other helper functions */
     void print(Node*, int) const;
     void print_v2(Node*, int) const;
 
-    void create_rec(Node*&, std::vector<T>, int, int);
+    virtual void create_rec(Node*&, const std::vector<T>&, int, int);
     bool search_element(Node*, const T&) const;
     int calc_height(const Node*) const;
 
@@ -52,11 +52,12 @@ public:
     BTree& operator= (const BTree&);
 
     Position<T> root_position(void);
+
     Iterator<T> begin(void);
     Iterator<T> end(void);
 
     void create(void);
-    void create(std::vector<T>);
+    virtual void create(const std::vector<T>&);
     bool search(const T&) const;
 
     void print2D(void) const;
