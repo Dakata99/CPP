@@ -4,9 +4,8 @@ TODO: check how it will be for non-oriented graphs
 */
 
 template <class Vertex, class Edge>
-void BFS(const Graph<Vertex, Edge>& g, const Vertex& vertex)  
-{
-    if(!g.has_vertex(vertex)) return;
+void BFS(const Graph<Vertex, Edge> &g, const Vertex &vertex) {
+    if (!g.has_vertex(vertex)) return;
 
     std::cout << "========== BFS ==========\n";
 
@@ -18,30 +17,26 @@ void BFS(const Graph<Vertex, Edge>& g, const Vertex& vertex)
 
     size_t level = 1;
     std::cout << "Level " << level++ << ": " << vertex << std::endl;
-    while (!actual.empty())
-    { 
+    while (!actual.empty()) {
         temporary = actual;
         Vertex current;
-        while (!temporary.empty())
-        {
+        while (!temporary.empty()) {
             current = temporary.front();
             temporary.pop();
             actual.pop();
 
             std::list<Vertex> list = g.get_successors(current);
-            for(typename std::list<Vertex>::iterator it = list.begin(); it != list.end(); it++)
-                if(visited[*it] == false) actual.push(*it);
+            for (typename std::list<Vertex>::iterator it = list.begin();
+                 it != list.end(); it++)
+                if (visited[*it] == false) actual.push(*it);
         }
-        
-        if(!actual.empty())
-        {
+
+        if (!actual.empty()) {
             temporary = actual;
             std::cout << "Level " << level++ << ": ";
-            while (!temporary.empty())
-            {
+            while (!temporary.empty()) {
                 current = temporary.front();
-                if(visited[current] == false)
-                {   
+                if (visited[current] == false) {
                     std::cout << current << ' ';
                     visited[current] = true;
                 }
@@ -56,9 +51,8 @@ void BFS(const Graph<Vertex, Edge>& g, const Vertex& vertex)
 
 /* TODO: CHECK IF IT WILL BE THE SAME FOR NON-ORIENTED GRAPHS */
 template <class Vertex, class Edge>
-void DFS(const Graph<Vertex, Edge>& graph, const Vertex& vertex)
-{
-    if(!graph.has_vertex(vertex)) return;
+void DFS(const Graph<Vertex, Edge> &graph, const Vertex &vertex) {
+    if (!graph.has_vertex(vertex)) return;
 
     std::cout << "=== DFS : ";
 
@@ -73,33 +67,28 @@ void DFS(const Graph<Vertex, Edge>& graph, const Vertex& vertex)
     std::stack<Vertex> actual;
     actual.push(vertex);
 
-    while (!actual.empty())
-    {
+    while (!actual.empty()) {
         Vertex curr = actual.top();
-        if(printable[curr]) std::cout << curr << ", ";
-        
+        if (printable[curr]) std::cout << curr << ", ";
+
         bool has_unvisited = false;
 
         std::list<Vertex> list = graph.get_successors(curr);
         Vertex next;
-        for(typename std::list<Vertex>::iterator it = list.begin(); it != list.end(); it++)
-        {
-            if(visited[*it] == white)
-            {
+        for (typename std::list<Vertex>::iterator it = list.begin();
+             it != list.end(); it++) {
+            if (visited[*it] == white) {
                 has_unvisited = true;
                 next = *it;
                 printable[next] = true;
                 break;
             }
         }
-        
-        if(!has_unvisited)
-        {
+
+        if (!has_unvisited) {
             visited[curr] = black;
             actual.pop();
-        }
-        else
-        {
+        } else {
             actual.push(next);
             visited[next] = grey;
             printable[curr] = false;
@@ -109,43 +98,35 @@ void DFS(const Graph<Vertex, Edge>& graph, const Vertex& vertex)
 }
 
 template <class Vertex, class Edge>
-bool is_connected(const Graph<Vertex, Edge>& graph)
-{
+bool is_connected(const Graph<Vertex, Edge> &graph) {
     return false;
 }
 
 template <class Vertex, class Edge>
-bool contains_path(const Graph<Vertex, Edge>& graph, const Vertex& from, const Vertex& to)
-{
+bool contains_path(const Graph<Vertex, Edge> &graph, const Vertex &from,
+                   const Vertex &to) {
     return false;
 }
 
 template <class Vertex, class Edge>
-bool contains_cycle(const Graph<Vertex, Edge>& graph)
-{
+bool contains_cycle(const Graph<Vertex, Edge> &graph) {
     return false;
 }
 
 template <class Vertex, class Edge>
-Edge Prim(const Graph<Vertex, Edge>& graph)
-{
+Edge Prim(const Graph<Vertex, Edge> &graph) {
     return Edge();
 }
 
 template <class Vertex, class Edge>
-Edge Kruskal(const Graph<Vertex, Edge>& graph)
-{
+Edge Kruskal(const Graph<Vertex, Edge> &graph) {
     return Edge();
 }
 
 template <class Vertex, class Edge>
-Edge Dijkstra(const Graph<Vertex, Edge>&graph)
-{
+Edge Dijkstra(const Graph<Vertex, Edge> &graph) {
     return Edge();
 }
 
 template <class Vertex, class Edge>
-void topological_sorting(const Graph<Vertex, Edge>& graph)
-{
-    
-}
+void topological_sorting(const Graph<Vertex, Edge> &graph) {}

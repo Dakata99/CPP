@@ -1,11 +1,11 @@
 #ifndef _GRAPH_ALGS_H_
 #define _GRAPH_ALGS_H_
 
-#include <stack>
-#include <queue>
-#include <map>
 #include <list>
+#include <map>
+#include <queue>
 #include <set>
+#include <stack>
 
 #include "../Graph.h"
 
