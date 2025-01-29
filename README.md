@@ -23,3 +23,17 @@
 		-- Functors
 		
 	- Iterators
+
+## CMake commands
+
+```bash
+cmake -S . -B build
+cmake --build build
+```
+
+## Python wrapper
+
+```bash
+. setupenv
+./cmake/run.py -h
+```
