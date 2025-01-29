@@ -1,6 +1,6 @@
 # Dakata99
 
-# Add PQueue as a static library
+# Add Queue as a static library
 add_library(cqueue STATIC src/Queue.cpp)
 target_include_directories(cqueue PUBLIC inc src)
 

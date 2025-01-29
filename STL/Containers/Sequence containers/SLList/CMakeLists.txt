@@ -1,6 +1,6 @@
 # Dakata99
 
-# Add PQueue as a static library
+# Add SLList as a static library
 add_library(sllist STATIC src/SLList.cpp)
 target_include_directories(sllist PUBLIC inc src)
 

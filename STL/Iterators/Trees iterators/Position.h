@@ -1,7 +1,7 @@
 #ifndef _POSITION_H_
 #define _POSITION_H_
 
-#include "../../Containers/Other/Graph/Trees/Binary/Linked/BTree.h"
+#include "../../Containers/Graph/Trees/Binary/Linked/inc/BTree.h"
 
 template <class T>
 class Position

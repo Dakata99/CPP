@@ -1,6 +1,6 @@
 # Dakata99
 
-# Add PQueue as a static library
+# Add DLList as a static library
 add_library(dllist STATIC src/DLList.cpp)
 target_include_directories(dllist PUBLIC inc src)
 

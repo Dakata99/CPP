@@ -1,6 +1,6 @@
 # Dakata99
 
-# Add PQueue as a static library
+# Add Vector as a static library
 add_library(vector STATIC src/Vector.cpp)
 target_include_directories(vector PUBLIC inc src)
 

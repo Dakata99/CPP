@@ -3,7 +3,7 @@
 
 #include <stack>
 
-#include "../../Containers/Other/Graph/Trees/Binary/Linked/BTree.h"
+#include "../../Containers/Graph/Trees/Binary/Linked/inc/BTree.h"
 #include "Position.h"
 
 template <class T>

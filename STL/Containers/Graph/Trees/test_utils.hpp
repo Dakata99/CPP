@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Binary/Linked/BTree.h"
+#include "Binary/Linked/inc/BTree.h"
 
 template <class T>
 void pre_order_convert(Position<T> root, std::vector<T>& vec)

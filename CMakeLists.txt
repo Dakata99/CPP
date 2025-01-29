@@ -14,5 +14,6 @@ set_property(GLOBAL PROPERTY CXX_STANDARD_REQUIRED ON)
 # include(cmake/formatter.cmake)
 # include(cmake/linter.cmake)
 
+add_subdirectory(OOP)
 add_subdirectory(STL)
 add_subdirectory(Utils)
