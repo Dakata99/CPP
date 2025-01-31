@@ -5,12 +5,10 @@
 
 #include "SLList.h"
 
-template<class T>
-std::vector<T> tovector(SLList<T> list)
-{
+template <class T>
+std::vector<T> tovector(SLList<T> list) {
     std::vector<T> res;
-    while (!list.empty())
-    {
+    while (!list.empty()) {
         res.push_back(list.front());
         list.pop_front();
     }

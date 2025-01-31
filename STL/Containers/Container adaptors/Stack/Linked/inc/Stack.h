@@ -3,12 +3,10 @@
 
 #include <ostream>
 
-template<class T>
-class Stack
-{
+template <class T>
+class Stack {
 private:
-    struct StackBox
-    {
+    struct StackBox {
         T data;
         StackBox* next;
         StackBox(const T& = T(), StackBox* = nullptr);
@@ -25,15 +23,15 @@ public:
     Stack(const Stack<T>&);
     ~Stack();
 
-    Stack& operator= (const Stack<T>&);
+    Stack& operator=(const Stack<T>&);
 
     void push(const T&);
     void pop(void);
     bool empty(void) const;
     const T& top(void) const;
 
-    template<class E>
-    friend std::ostream& operator<< (std::ostream&, const Stack<T>&);
+    template <class E>
+    friend std::ostream& operator<<(std::ostream&, const Stack<T>&);
 };
 
 #endif

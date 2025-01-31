@@ -1,26 +1,27 @@
-#include "doctest.h"
-#include "Vector.hpp"
 #include "Iterator.hpp"
+#include "Vector.hpp"
+#include "doctest.h"
 #include "test_utils.hpp"
 
-TEST_CASE("Constructors test")
-{
+TEST_CASE("Constructors test") {
     Vector<int> vec;
-    
-    for (size_t i = 0; i < 5; i++) vec.push_back(i);
+
+    for (size_t i = 0; i < 5; i++) {
+        vec.push_back(i);
+    }
 
     CHECK(vec.get_size() == 5);
-    
-    CHECK(tovector(vec) == std::vector<int> { 0, 1, 2, 3, 4 });
-    
+
+    CHECK(tovector(vec) == std::vector<int>{0, 1, 2, 3, 4});
+
     vec.pop_back();
-    CHECK(tovector(vec) == std::vector<int> { 0, 1, 2, 3 });
+    CHECK(tovector(vec) == std::vector<int>{0, 1, 2, 3});
 
     CHECK(vec.get_size() == 4);
 
     Vector<int> vec2(5);
     CHECK(vec2.get_size() == 5);
-    
+
     Vector<int> vec3(5, 99);
     CHECK(vec3.get_size() == 5);
 
@@ -31,8 +32,7 @@ TEST_CASE("Constructors test")
     CHECK(vec.get_size() == 4);
 }
 
-TEST_CASE("Operators test")
-{
+TEST_CASE("Operators test") {
     Vector<int> vec(3, 55);
     Vector<int> vec2 = vec;
 
@@ -49,16 +49,19 @@ TEST_CASE("Operators test")
     CHECK(vec[0] == 55);
     CHECK(vec[3] == 1);
     CHECK(vec.front() == 55);
-    CHECK(vec.back() == 9);  
+    CHECK(vec.back() == 9);
 }
 
-TEST_CASE("Iterator test")
-{
+TEST_CASE("Iterator test") {
     Vector<int> vec;
-    for (size_t i = 0; i < 10; i++) vec.push_back(i);
-    
-    size_t i = 0;
-    for (Iterator<int> it = vec.begin(); it != vec.end(); it++) CHECK(*it == vec[i++]);
+    for (size_t i = 0; i < 10; i++) {
+        vec.push_back(i);
+    }
 
-    //Vector<int> vec2(vec.begin(), vec.end());
+    size_t i = 0;
+    for (Iterator<int> it = vec.begin(); it != vec.end(); it++) {
+        CHECK(*it == vec[i++]);
+    }
+
+    // Vector<int> vec2(vec.begin(), vec.end());
 }

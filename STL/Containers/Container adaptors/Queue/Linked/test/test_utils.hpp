@@ -5,13 +5,11 @@
 
 #include "Queue.h"
 
-template<class T>
-std::vector<T> tovector(Queue<T> q)
-{
+template <class T>
+std::vector<T> tovector(Queue<T> q) {
     std::vector<T> res;
-    
-    while (!q.empty())
-    {
+
+    while (!q.empty()) {
         res.push_back(q.front());
         q.pop();
     }

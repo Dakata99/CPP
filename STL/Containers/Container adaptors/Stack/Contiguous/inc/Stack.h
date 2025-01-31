@@ -3,9 +3,8 @@
 
 #include <iostream>
 
-template<class T>
-class Stack
-{
+template <class T>
+class Stack {
 private:
     T* data;
     size_t top_index, size;
@@ -19,7 +18,7 @@ public:
     Stack(const Stack<T>&);
     ~Stack();
 
-    Stack& operator= (const Stack<T>&);
+    Stack& operator=(const Stack<T>&);
 
     void push(const T&);
     void pop(void);
@@ -27,7 +26,7 @@ public:
     const T& top(void) const;
 
     template <class E>
-    friend std::ostream& operator<< (std::ostream&, const Stack<E>&);
+    friend std::ostream& operator<<(std::ostream&, const Stack<E>&);
 };
 
 #endif

@@ -1,12 +1,12 @@
 #pragma once
-#include "Graph.h"
 #include <vector>
+
+#include "Graph.h"
 
 /* Graph representation with adjacency matrix */
 
-template<class T>
-class GMatrix
-{
+template <class T>
+class GMatrix {
 private:
     std::vector<std::vector<T>> matrix;
 

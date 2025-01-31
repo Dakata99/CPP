@@ -6,9 +6,10 @@
 #include "Binary/Linked/inc/BTree.h"
 
 template <class T>
-void pre_order_convert(Position<T> root, std::vector<T>& vec)
-{
-    if (root.empty()) return;
+void pre_order_convert(Position<T> root, std::vector<T>& vec) {
+    if (root.empty()) {
+        return;
+    }
 
     vec.push_back(root.get());
     pre_order_convert(root.left(), vec);
@@ -16,8 +17,7 @@ void pre_order_convert(Position<T> root, std::vector<T>& vec)
 }
 
 template <class T>
-std::vector<T> tovector_pre_order(BTree<T> tree)
-{
+std::vector<T> tovector_pre_order(BTree<T> tree) {
     std::vector<T> vec;
 
     pre_order_convert(tree.root_position(), vec);
@@ -26,9 +26,10 @@ std::vector<T> tovector_pre_order(BTree<T> tree)
 }
 
 template <class T>
-void in_order_convert(Position<T> root, std::vector<T>& vec)
-{
-    if (root.empty()) return;
+void in_order_convert(Position<T> root, std::vector<T>& vec) {
+    if (root.empty()) {
+        return;
+    }
 
     in_order_convert(root.left(), vec);
     vec.push_back(root.get());
@@ -36,8 +37,7 @@ void in_order_convert(Position<T> root, std::vector<T>& vec)
 }
 
 template <class T>
-std::vector<T> tovector_in_order(BTree<T> tree)
-{
+std::vector<T> tovector_in_order(BTree<T> tree) {
     std::vector<T> vec;
 
     in_order_convert(tree.root_position(), vec);
@@ -46,9 +46,10 @@ std::vector<T> tovector_in_order(BTree<T> tree)
 }
 
 template <class T>
-void post_order_convert(Position<T> root, std::vector<T>& vec)
-{
-    if (root.empty()) return;
+void post_order_convert(Position<T> root, std::vector<T>& vec) {
+    if (root.empty()) {
+        return;
+    }
 
     post_order_convert(root.left(), vec);
     post_order_convert(root.right(), vec);
@@ -56,8 +57,7 @@ void post_order_convert(Position<T> root, std::vector<T>& vec)
 }
 
 template <class T>
-std::vector<T> tovector_post_order(BTree<T> tree)
-{
+std::vector<T> tovector_post_order(BTree<T> tree) {
     std::vector<T> vec;
 
     post_order_convert(tree.root_position(), vec);

@@ -5,13 +5,11 @@
 
 #include "Stack.h"
 
-template<class T>
-std::vector<T> tovector(Stack<T> st)
-{
+template <class T>
+std::vector<T> tovector(Stack<T> st) {
     std::vector<T> res;
-    
-    while (!st.empty())
-    {
+
+    while (!st.empty()) {
         res.push_back(st.top());
         st.pop();
     }

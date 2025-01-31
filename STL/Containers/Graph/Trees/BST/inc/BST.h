@@ -1,17 +1,16 @@
 #ifndef _BST_H_
 #define _BST_H_
 
-#include <iostream>
-#include <cassert>
-#include <queue>
-#include <cmath>
 #include <algorithm>
+#include <cassert>
+#include <cmath>
+#include <iostream>
+#include <queue>
 
 #include "../../Binary/Linked/src/BTree.hpp"
 
 template <class T>
-class BST : public BTree<T>
-{
+class BST : public BTree<T> {
 private:
     friend Position<T>;
 
@@ -24,14 +23,14 @@ private: /* other helper functions */
 
 private:
     BTNode* find_min(BTNode*);
-    BTNode* in_pre(BTNode*root);
-    BTNode* in_succ(BTNode*root);
+    BTNode* in_pre(BTNode* root);
+    BTNode* in_succ(BTNode* root);
 
 public:
     BST();
     BST(const BST&);
 
-    BST& operator= (const BST&);
+    BST& operator=(const BST&);
 
     void create(const std::vector<T>&) override;
 

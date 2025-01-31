@@ -7,17 +7,16 @@
 #include "Position.h"
 
 template <class T>
-class Iterator
-{
+class Iterator {
 private:
     friend Position<T>;
-    std::stack<Position<T>> st;  
+    std::stack<Position<T>> st;
 
 public:
     Iterator(Position<T>, bool);
-    T operator* (void) const;
-    Iterator& operator++ (void);
-    bool operator!= (const Iterator&) const;
+    T operator*(void) const;
+    Iterator& operator++(void);
+    bool operator!=(const Iterator&) const;
 };
 
 #include "Iterator.cpp"

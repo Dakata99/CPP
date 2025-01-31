@@ -6,17 +6,15 @@
 #define COUNT 5
 
 template <class T>
-class Tree
-{
+class Tree {
 protected:
-    struct Node
-    {
+    struct Node {
         int height;
         T value;
         Node *left, *right;
-        Node(Node * = nullptr, const T& = T(), Node * = nullptr);
+        Node(Node* = nullptr, const T& = T(), Node* = nullptr);
     };
-    
+
     Node* root;
 
 private:
@@ -42,10 +40,10 @@ public:
     Tree(const Tree&);
     ~Tree();
 
-    Tree& operator= (const Tree&);
+    Tree& operator=(const Tree&);
 
     void create(void);
-    
+
     void create(std::vector<T>);
     bool search(const T&) const;
 

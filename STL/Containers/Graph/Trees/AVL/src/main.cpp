@@ -1,11 +1,10 @@
 #include <iostream>
 
-#include "AVL.h"
-#include "../../../../../Iterators/Trees iterators/Position.h"
 #include "../../../../../Iterators/Trees iterators/Iterator.h"
+#include "../../../../../Iterators/Trees iterators/Position.h"
+#include "AVL.h"
 
-void run(void)
-{
+void run(void) {
     AVL<int> t1;
 
     t1.insert_rec(50);
@@ -13,7 +12,9 @@ void run(void)
     t1.insert_rec(20);
     t1.print2D();
 
-    for(int i = 0; i < 20; i++) t1.insert_rec(std::rand() % 50 + -50);
+    for (int i = 0; i < 20; i++) {
+        t1.insert_rec(std::rand() % 50 + -50);
+    }
     t1.print2D();
 
 #if 0
@@ -36,11 +37,9 @@ void run(void)
     t1.remove(20);
     t1.print2D();
 #endif
-
 }
 
-int main(void)
-{
+int main(void) {
     // run();
 
     return 0;

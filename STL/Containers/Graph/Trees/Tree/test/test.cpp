@@ -1,10 +1,9 @@
-#include "doctest.h"
-#include "Tree.hpp"
-
 #include <iostream>
 
-TEST_CASE("1")
-{
+#include "Tree.hpp"
+#include "doctest.h"
+
+TEST_CASE("1") {
     Tree<int> t1;
     t1.create();
     t1.print2D();
@@ -22,5 +21,5 @@ TEST_CASE("1")
     t3.post_order();
 
     // std::cout << std::boolalpha << t1.search(6) << std::endl;
-    //std::cout << t2.height() << std::endl;
+    // std::cout << t2.height() << std::endl;
 }

@@ -6,8 +6,7 @@
 #include "Base/Graph.hpp"
 
 template <class Vertex, class Edge>
-class GMatrix : public Graph<Vertex, Edge>
-{
+class GMatrix : public Graph<Vertex, Edge> {
 private:
     std::map<std::pair<Vertex, Vertex>, Edge> matrix;
 
@@ -35,7 +34,7 @@ public:
 
     int enter_degree(const Vertex&) const override;
     int exit_degree(const Vertex&) const override;
-    
+
     bool has_way(const Vertex&, const Vertex&) const override;
     bool isolated(const Vertex&) const override;
 
@@ -44,7 +43,7 @@ public:
 
     size_t count_of_vertices(void) const override;
     size_t count_of_edges(void) const override;
-    
+
     void BFS(const Vertex&) const override;
     void DFS(const Vertex&) const override;
 

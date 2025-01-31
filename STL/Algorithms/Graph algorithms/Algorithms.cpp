@@ -5,7 +5,9 @@ TODO: check how it will be for non-oriented graphs
 
 template <class Vertex, class Edge>
 void BFS(const Graph<Vertex, Edge> &g, const Vertex &vertex) {
-    if (!g.has_vertex(vertex)) return;
+    if (!g.has_vertex(vertex)) {
+        return;
+    }
 
     std::cout << "========== BFS ==========\n";
 
@@ -27,8 +29,11 @@ void BFS(const Graph<Vertex, Edge> &g, const Vertex &vertex) {
 
             std::list<Vertex> list = g.get_successors(current);
             for (typename std::list<Vertex>::iterator it = list.begin();
-                 it != list.end(); it++)
-                if (visited[*it] == false) actual.push(*it);
+                 it != list.end(); it++) {
+                if (visited[*it] == false) {
+                    actual.push(*it);
+                }
+            }
         }
 
         if (!actual.empty()) {
@@ -52,7 +57,9 @@ void BFS(const Graph<Vertex, Edge> &g, const Vertex &vertex) {
 /* TODO: CHECK IF IT WILL BE THE SAME FOR NON-ORIENTED GRAPHS */
 template <class Vertex, class Edge>
 void DFS(const Graph<Vertex, Edge> &graph, const Vertex &vertex) {
-    if (!graph.has_vertex(vertex)) return;
+    if (!graph.has_vertex(vertex)) {
+        return;
+    }
 
     std::cout << "=== DFS : ";
 
@@ -69,7 +76,9 @@ void DFS(const Graph<Vertex, Edge> &graph, const Vertex &vertex) {
 
     while (!actual.empty()) {
         Vertex curr = actual.top();
-        if (printable[curr]) std::cout << curr << ", ";
+        if (printable[curr]) {
+            std::cout << curr << ", ";
+        }
 
         bool has_unvisited = false;
 

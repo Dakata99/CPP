@@ -1,11 +1,11 @@
 #pragma once
-#include "Graph.h"
-#include <vector>
 #include <tuple>
+#include <vector>
+
+#include "Graph.h"
 
 template <class Vertex, class Edge>
-class GEList : public Graph<Vertex, Edge>
-{
+class GEList : public Graph<Vertex, Edge> {
 private:
     std::vector<std::tuple<Vertex, Vertex, Edge>> edges;
 
@@ -24,7 +24,7 @@ public:
     bool has_vertex(const Vertex&) const override;
     bool has_edge(const Vertex&, const Vertex&) const override;
     bool has_way(const Vertex&, const Vertex&) const override;
-    
+
     void BFS(void) const override;
     void DFS(void) const override;
 

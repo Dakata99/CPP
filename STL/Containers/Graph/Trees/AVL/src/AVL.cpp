@@ -7,48 +7,49 @@ template <class T>
 AVL<T>::AVL(const AVL& other) : BST<T>(other) {}
 
 template <class T>
-AVL<T>& AVL<T>::operator= (const AVL& other)
-{
-    if(this != &other)
-    {
+AVL<T>& AVL<T>::operator=(const AVL& other) {
+    if (this != &other) {
         BST<T>::operator=(other);
     }
     return *this;
 }
 
 template <class T>
-bool AVL<T>::search_iter(const T& element) const
-{
-    if(this->root == nullptr) return false;
+bool AVL<T>::search_iter(const T& element) const {
+    if (this->root == nullptr) {
+        return false;
+    }
 
     BTNode* curr = this->root;
-    while (curr != nullptr)
-    {
-        if(curr->value == element) return true;
-        else if(curr->value > element) curr = curr->left;
-        else if(curr->value < element) curr = curr->right;
+    while (curr != nullptr) {
+        if (curr->value == element) {
+            return true;
+        } else if (curr->value > element) {
+            curr = curr->left;
+        } else if (curr->value < element) {
+            curr = curr->right;
+        }
     }
 
     return false;
 }
 
 template <class T>
-typename BST<T>::Node* AVL<T>::remove_rec(BTNode* root, const T& element)
-{
-    if(root == nullptr) return root;
+typename BST<T>::Node* AVL<T>::remove_rec(BTNode* root, const T& element) {
+    if (root == nullptr) {
+        return root;
+    }
 
-    if(root->value > element) root->left = remove_rec(root->left, element);
-    else if(root->value < element) root->right = remove_rec(root->right, element);
-    else
-    {
-        if(root->left == nullptr)
-        {
+    if (root->value > element) {
+        root->left = remove_rec(root->left, element);
+    } else if (root->value < element) {
+        root->right = remove_rec(root->right, element);
+    } else {
+        if (root->left == nullptr) {
             BTNode* temp = root->right;
             delete root;
             return temp;
-        }
-        else if(root->right == nullptr)
-        {
+        } else if (root->right == nullptr) {
             BTNode* temp = root->left;
             delete root;
             return temp;
@@ -62,14 +63,17 @@ typename BST<T>::Node* AVL<T>::remove_rec(BTNode* root, const T& element)
 }
 
 template <class T>
-void AVL<T>::remove(const T& element) 
-{ if(!this->search_element(this->root, element)) return; this->root = remove_rec(this->root, element); }
+void AVL<T>::remove(const T& element) {
+    if (!this->search_element(this->root, element)) {
+        return;
+    }
+    this->root = remove_rec(this->root, element);
+}
 
 template <class T>
-typename BST<T>::Node* AVL<T>::LL_rotation(BTNode* root)
-{
-    BTNode *pl = root->left;
-    BTNode *plr = pl->right;
+typename BST<T>::Node* AVL<T>::LL_rotation(BTNode* root) {
+    BTNode* pl = root->left;
+    BTNode* plr = pl->right;
 
     pl->right = root;
     root->left = plr;
@@ -80,8 +84,7 @@ typename BST<T>::Node* AVL<T>::LL_rotation(BTNode* root)
 }
 
 template <class T>
-typename BST<T>::Node* AVL<T>::RR_rotation(BTNode* root)
-{
+typename BST<T>::Node* AVL<T>::RR_rotation(BTNode* root) {
     BTNode* pr = root->right;
     BTNode* prl = pr->left;
 
@@ -94,8 +97,7 @@ typename BST<T>::Node* AVL<T>::RR_rotation(BTNode* root)
 }
 
 template <class T>
-typename BST<T>::Node* AVL<T>::LR_rotation(BTNode* root)
-{
+typename BST<T>::Node* AVL<T>::LR_rotation(BTNode* root) {
     BTNode* cl = root->left;
     BTNode* clr = cl->right;
 
@@ -107,14 +109,13 @@ typename BST<T>::Node* AVL<T>::LR_rotation(BTNode* root)
 
     cl->height = this->calc_height(cl);
     root->height = this->calc_height(root);
-    clr->height = this->calc_height(clr); 
-    
+    clr->height = this->calc_height(clr);
+
     return clr;
 }
 
 template <class T>
-typename BST<T>::Node* AVL<T>::RL_rotation(BTNode* root)
-{
+typename BST<T>::Node* AVL<T>::RL_rotation(BTNode* root) {
     BTNode* cr = root->right;
     BTNode* crl = cr->left;
 
@@ -132,44 +133,55 @@ typename BST<T>::Node* AVL<T>::RL_rotation(BTNode* root)
 }
 
 template <class T>
-typename BST<T>::Node* AVL<T>::insert_rec(BTNode* root, const T& element)
-{
-    if(root == nullptr)
-    {
+typename BST<T>::Node* AVL<T>::insert_rec(BTNode* root, const T& element) {
+    if (root == nullptr) {
         root = new BTNode(nullptr, element, nullptr);
         return root;
     }
-    if(root->value > element) root->left = insert_rec(root->left, element);
-    else if(root->value < element) root->right = insert_rec(root->right, element);
+    if (root->value > element) {
+        root->left = insert_rec(root->left, element);
+    } else if (root->value < element) {
+        root->right = insert_rec(root->right, element);
+    }
 
     root->height = this->calc_height(root);
 
-    if(balance_factor(root) == 2 && balance_factor(root->left) == 1) return LL_rotation(root);
-    else if(balance_factor(root) == 2 && balance_factor(root->left) == -1) return LR_rotation(root);
-    else if(balance_factor(root) == -2 && balance_factor(root->right) == -1) return RR_rotation(root);
-    else if(balance_factor(root) == -2 && balance_factor(root->right) == 1) return RL_rotation(root);
+    if (balance_factor(root) == 2 && balance_factor(root->left) == 1) {
+        return LL_rotation(root);
+    } else if (balance_factor(root) == 2 && balance_factor(root->left) == -1) {
+        return LR_rotation(root);
+    } else if (balance_factor(root) == -2 &&
+               balance_factor(root->right) == -1) {
+        return RR_rotation(root);
+    } else if (balance_factor(root) == -2 && balance_factor(root->right) == 1) {
+        return RL_rotation(root);
+    }
 
     return root;
 }
 
 template <class T>
-void AVL<T>::insert_rec(const T& element) 
-{ if(!this->search_element(this->root, element)) this->root = insert_rec(this->root, element); }
+void AVL<T>::insert_rec(const T& element) {
+    if (!this->search_element(this->root, element)) {
+        this->root = insert_rec(this->root, element);
+    }
+}
 
 template <class T>
-typename BST<T>::Node* AVL<T>::find_min(BTNode* root)
-{
-	BTNode* current = root;
-	while (current != nullptr && current->left != nullptr) current = current->left;
- 
+typename BST<T>::Node* AVL<T>::find_min(BTNode* root) {
+    BTNode* current = root;
+    while (current != nullptr && current->left != nullptr) {
+        current = current->left;
+    }
+
     return current;
 }
 
 template <class T>
-int AVL<T>::balance_factor(BTNode* root)
-{
+int AVL<T>::balance_factor(BTNode* root) {
     int lh = root != nullptr && root->left != nullptr ? root->left->height : -1;
-    int rh = root != nullptr && root->right != nullptr ? root->right->height : -1;
+    int rh =
+        root != nullptr && root->right != nullptr ? root->right->height : -1;
 
     return lh - rh;
 }

@@ -4,16 +4,15 @@
 #include <cassert>
 
 template <class T>
-class Iterator
-{
+class Iterator {
 private:
     T* ptr;
 
 public:
     Iterator(T* = nullptr);
 
-    const T& operator* (void) const;
-    Iterator& operator++ (void);
+    const T& operator*(void) const;
+    Iterator& operator++(void);
 };
 
 #include "Iterator.cpp"

@@ -1,15 +1,17 @@
-#include "doctest.h"
 #include "GList.hpp"
+#include "doctest.h"
 
-std::string city_names[] = { "Vidin", "Sliven", "Vraca", "Sofiq", "Plovdiv", "Kyustendil", 
-                                "Blagoevgrad", "Razgrad", "Pleven", "Varna", "Burgas", "Dobrich" };
+std::string city_names[] = {"Vidin",   "Sliven",     "Vraca",       "Sofiq",
+                            "Plovdiv", "Kyustendil", "Blagoevgrad", "Razgrad",
+                            "Pleven",  "Varna",      "Burgas",      "Dobrich"};
 
-TEST_CASE("Oriented weighted graph tests")
-{
+TEST_CASE("Oriented weighted graph tests") {
     GList<std::string, size_t> cities(true, true);
-     
-    for (const std::string& city_name : city_names)  cities.add_vertex(city_name);
-    
+
+    for (const std::string& city_name : city_names) {
+        cities.add_vertex(city_name);
+    }
+
 #if 1
     cities.add_edge("Blagoevgrad", "Kyustendil", 10);
     cities.add_edge("Kyustendil", "Sofiq", 20);
@@ -32,15 +34,15 @@ TEST_CASE("Oriented weighted graph tests")
     cities.add_edge("Burgas", "Sliven", 190);
     cities.add_edge("Sofiq", "Varna", 200);
 #endif
-   
-    cities.print(); // To make a vector somehow and check it
+
+    cities.print();  // To make a vector somehow and check it
 
     CHECK(cities.has_vertex("Dupnicca") == false);
     CHECK(cities.has_edge("Dupnica", "Varna") == false);
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Burgas", "Plovdiv") == false);
     CHECK(cities.has_edge("Dupnica", "Varna") == false);
-    
+
     // cities.print_degrees();
 
 #if 0
@@ -74,9 +76,8 @@ TEST_CASE("Oriented weighted graph tests")
                                 << cities.has_way("Kyustendil", "Vidin") << std::endl;
 
     cities.print_successors("Plovdiv");
-    cities.print_predecessors("Plovdiv");    
+    cities.print_predecessors("Plovdiv");
 #endif
-
 
 #if 0
     GList<std::string, size_t> graph(true, true);
@@ -93,12 +94,13 @@ TEST_CASE("Oriented weighted graph tests")
 #endif
 }
 
-TEST_CASE("Oriented non-weighted graph test")
-{
+TEST_CASE("Oriented non-weighted graph test") {
     GList<std::string, size_t> cities(true, false);
-     
-    for (const std::string& city_name : city_names)  cities.add_vertex(city_name);
-    
+
+    for (const std::string& city_name : city_names) {
+        cities.add_vertex(city_name);
+    }
+
 #if 1
     cities.add_edge("Blagoevgrad", "Kyustendil", 10);
     cities.add_edge("Kyustendil", "Sofiq", 20);
@@ -129,7 +131,7 @@ TEST_CASE("Oriented non-weighted graph test")
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Burgas", "Plovdiv") == false);
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
-    
+
     cities.print_degrees();
 
 #if 0
@@ -163,9 +165,8 @@ TEST_CASE("Oriented non-weighted graph test")
                                 << cities.has_way("Kyustendil", "Vidin") << std::endl;
 
     cities.print_successors("Plovdiv");
-    cities.print_predecessors("Plovdiv");    
+    cities.print_predecessors("Plovdiv");
 #endif
-
 
 #if 0
     GList<std::string, size_t> graph(true, true);
@@ -181,12 +182,13 @@ TEST_CASE("Oriented non-weighted graph test")
 #endif
 }
 
-TEST_CASE("Non-oriented weighted graph tests")
-{
+TEST_CASE("Non-oriented weighted graph tests") {
     GList<std::string, size_t> cities(false, true);
-     
-    for(const std::string& city_name : city_names)  cities.add_vertex(city_name);
-    
+
+    for (const std::string& city_name : city_names) {
+        cities.add_vertex(city_name);
+    }
+
 #if 1
     cities.add_edge("Blagoevgrad", "Kyustendil", 10);
     cities.add_edge("Kyustendil", "Sofiq", 20);
@@ -217,7 +219,7 @@ TEST_CASE("Non-oriented weighted graph tests")
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Burgas", "Plovdiv") == true);
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
-        
+
     cities.print_degrees();
 
 #if 0
@@ -251,9 +253,8 @@ TEST_CASE("Non-oriented weighted graph tests")
                                 << cities.has_way("Kyustendil", "Vidin") << std::endl;
 
     cities.print_successors("Plovdiv");
-    cities.print_predecessors("Plovdiv");    
+    cities.print_predecessors("Plovdiv");
 #endif
-
 
 #if 0
     GList<std::string, size_t> graph(false, true);
@@ -269,12 +270,13 @@ TEST_CASE("Non-oriented weighted graph tests")
 #endif
 }
 
-TEST_CASE("Non-oriented non-weighted graph tests")
-{
+TEST_CASE("Non-oriented non-weighted graph tests") {
     GList<std::string, size_t> cities(false, false);
 
-    for(const std::string& city_name : city_names)  cities.add_vertex(city_name);
-    
+    for (const std::string& city_name : city_names) {
+        cities.add_vertex(city_name);
+    }
+
 #if 1
     cities.add_edge("Blagoevgrad", "Kyustendil", 10);
     cities.add_edge("Kyustendil", "Sofiq", 20);
@@ -305,7 +307,7 @@ TEST_CASE("Non-oriented non-weighted graph tests")
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Burgas", "Plovdiv") == true);
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
-   
+
     cities.print_degrees();
 
 #if 0
@@ -339,9 +341,8 @@ TEST_CASE("Non-oriented non-weighted graph tests")
                                 << cities.has_way("Kyustendil", "Vidin") << std::endl;
 
     cities.print_successors("Plovdiv");
-    cities.print_predecessors("Plovdiv");    
+    cities.print_predecessors("Plovdiv");
 #endif
-
 
 #if 0
     GList<std::string, size_t> graph(false, true);
@@ -357,11 +358,12 @@ TEST_CASE("Non-oriented non-weighted graph tests")
 #endif
 }
 
-TEST_CASE("Integer graph tests")
-{
+TEST_CASE("Integer graph tests") {
     GList<int, int> g(true, false);
 
-    for(size_t i = 1; i <= 12; i++) g.add_vertex(i);
+    for (size_t i = 1; i <= 12; i++) {
+        g.add_vertex(i);
+    }
 
 #if 1
     g.add_edge(1, 2);
@@ -386,7 +388,8 @@ TEST_CASE("Integer graph tests")
     CHECK(g.has_edge(7, 8) == true);
     CHECK(g.has_edge(12, 11) == false);
 
-    // for(size_t i = 1; i <= 12; i++) { g.BFS(i); g.DFS(i); } // TODO vectors and compare them
+    // for(size_t i = 1; i <= 12; i++) { g.BFS(i); g.DFS(i); } // TODO vectors
+    // and compare them
 
 #if 0
     g.print();

@@ -1,13 +1,12 @@
 #include <iostream>
 
-#include "BST.h"
-#include "../../../../../Iterators/Trees iterators/Position.h"
 #include "../../../../../Iterators/Trees iterators/Iterator.h"
+#include "../../../../../Iterators/Trees iterators/Position.h"
+#include "BST.h"
 
-void run(void)
-{
+void run(void) {
     BST<int> t1;
-    
+
     t1.insert_rec(20);
     t1.insert_rec(30);
     t1.insert_rec(15);
@@ -18,7 +17,6 @@ void run(void)
     t1.insert_iter(55);
     t1.insert_iter(33);
     t1.insert_iter(28);
-    
 
     t1.print2D();
     t1.remove(28);
@@ -29,7 +27,7 @@ void run(void)
     t1.print2D();
 
 #if 1
-    std::vector<int> vec = { 36, 52, 7, 4, 3, 59, 0, 1, 8, 45, -1, 124, -1 };
+    std::vector<int> vec = {36, 52, 7, 4, 3, 59, 0, 1, 8, 45, -1, 124, -1};
     BST<int> t2;
     t2.create(vec);
     t2.print2D();
@@ -62,12 +60,9 @@ void run(void)
     t.print2D();
     t1.print2D_v2();
 #endif
-
-    
 }
 
-int main(void)
-{
+int main(void) {
     // run();
 
     return 0;

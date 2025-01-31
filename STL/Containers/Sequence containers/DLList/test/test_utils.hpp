@@ -5,13 +5,11 @@
 
 #include "DLList.h"
 
-template<class T>
-std::list<T> tolist(DLList<T> list)
-{
+template <class T>
+std::list<T> tolist(DLList<T> list) {
     std::list<T> res;
-    
-    while (!list.empty())
-    {
+
+    while (!list.empty()) {
         res.push_back(list.front());
         list.pop_front();
     }

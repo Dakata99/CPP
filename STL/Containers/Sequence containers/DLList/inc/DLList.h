@@ -3,22 +3,21 @@
 
 #include <ostream>
 
-template<class T>
+template <class T>
 class Iterator;
 
-template<class T>
-class DLList
-{
+template <class T>
+class DLList {
 private:
     friend class Iterator<T>;
-    struct Node
-    {
+    struct Node {
         T data;
-        Node* previous, *next;
+        Node *previous, *next;
         Node(Node* = nullptr, const T = T(), Node* = nullptr);
     };
-    
-    Node* head, *tail;
+
+    Node *head, *tail;
+
 private:
     void copy(const DLList<T>&);
     void clear();
@@ -28,7 +27,7 @@ public:
     DLList(const DLList<T>&);
     ~DLList();
 
-    DLList& operator= (const DLList<T>&);
+    DLList& operator=(const DLList<T>&);
 
     bool empty(void) const;
 
@@ -40,8 +39,8 @@ public:
     void push_back(const T&);
     void pop_back(void);
 
-    template<class E>
-    friend std::ostream& operator<< (std::ostream&, const DLList<E>&);
+    template <class E>
+    friend std::ostream& operator<<(std::ostream&, const DLList<E>&);
 
     Iterator<T> begin(void);
     Iterator<T> end(void);

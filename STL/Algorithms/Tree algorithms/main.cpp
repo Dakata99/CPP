@@ -2,8 +2,7 @@
 
 #include "TreeAlgorithms.h"
 
-int main(void)
-{
+int main(void) {
     BTree<int> t;
     t.create();
     pre_order(t);

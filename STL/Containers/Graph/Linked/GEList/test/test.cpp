@@ -1,15 +1,17 @@
-#include "doctest.h"
 #include "GEList.hpp"
+#include "doctest.h"
 
-TEST_CASE("ORIENTED WEIGHTED GRAPH TESTS")
-{
+TEST_CASE("ORIENTED WEIGHTED GRAPH TESTS") {
     GEList<std::string, size_t> cities(true, true);
 
-    std::string city_names[] = { "Vidin", "Sliven", "Vraca", "Sofiq", "Plovdiv", "Kyustendil", 
-                                "Blagoevgrad", "Razgrad", "Pleven", "Varna", "Burgas", "Dobrich" };
-     
-    for(const std::string& city_name : city_names)  cities.add(city_name);
-    
+    std::string city_names[] = {
+        "Vidin",       "Sliven",  "Vraca",  "Sofiq", "Plovdiv", "Kyustendil",
+        "Blagoevgrad", "Razgrad", "Pleven", "Varna", "Burgas",  "Dobrich"};
+
+    for (const std::string& city_name : city_names) {
+        cities.add(city_name);
+    }
+
 #if 1
     cities.add("Blagoevgrad", "Kyustendil", 10);
     cities.add("Kyustendil", "Sofiq", 20);
@@ -32,7 +34,7 @@ TEST_CASE("ORIENTED WEIGHTED GRAPH TESTS")
     cities.add("Burgas", "Sliven", 190);
     cities.add("Sofiq", "Varna", 200);
 #endif
-   
+
     cities.print();
 
     CHECK(cities.has_vertex("Dupnicca") == false);
@@ -40,7 +42,7 @@ TEST_CASE("ORIENTED WEIGHTED GRAPH TESTS")
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Burgas", "Plovdiv") == false);
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
-    
+
     cities.print_degrees();
 
     cities.BFS("Vidin");
@@ -68,13 +70,12 @@ TEST_CASE("ORIENTED WEIGHTED GRAPH TESTS")
     CHECK(cities.has_way("Kyustendil", "Vidin") == false);
 
     // cities.print_successors("Plovdiv");
-    // cities.print_predecessors("Plovdiv");    
+    // cities.print_predecessors("Plovdiv");
 }
 
-TEST_CASE("ORIENTED NON-WEIGHTED GRAPH TESTS")
-{
+TEST_CASE("ORIENTED NON-WEIGHTED GRAPH TESTS") {
     GEList<std::string, size_t> cities(5, true, false);
-    
+
     cities.add("Dupnica", "Sofiq");
     cities.add("Sofiq", "Plovdiv");
     cities.add("Sofiq", "Varna");
@@ -90,12 +91,11 @@ TEST_CASE("ORIENTED NON-WEIGHTED GRAPH TESTS")
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
 }
 
-TEST_CASE("NON-ORIENTED WEIGHTED GRAPH TESTS")
-{
+TEST_CASE("NON-ORIENTED WEIGHTED GRAPH TESTS") {
     GEList<std::string, size_t> cities(5, false, true);
-    
+
     CHECK(cities.has_vertex("Dupnicca") == false);
-    
+
     cities.add("Dupnica", "Sofiq", 60);
     cities.add("Kyustendil", "Dupnica");
     cities.add("Sofiq", "Plovdiv", 220);
@@ -111,24 +111,23 @@ TEST_CASE("NON-ORIENTED WEIGHTED GRAPH TESTS")
     cities.set("Qmbol", "Dobrich", 111);
 
     cities.print();
-    
+
     CHECK(cities.has_vertex("Dupnicca") == false);
     CHECK(cities.has_edge("Dupnica", "Varna") == false);
     CHECK(cities.has_edge("Plovdiv", "Burgas") == true);
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
 
     // CAUSES SEGMENTATION FAULT
-    //cities.remove_edge("Sofiq", "Burgas");
-    //cities.print();
+    // cities.remove_edge("Sofiq", "Burgas");
+    // cities.print();
 
-    //cities.remove_vertex("Plovdiv");
-    //cities.print();
+    // cities.remove_vertex("Plovdiv");
+    // cities.print();
 }
 
-TEST_CASE("NON-ORIENTED NON-WEIGHTED GRAPH TESTS")
-{
+TEST_CASE("NON-ORIENTED NON-WEIGHTED GRAPH TESTS") {
     GEList<std::string, size_t> cities(5, false, false);
-    
+
     cities.add("Dupnica", "Sofiq");
     cities.add("Sofiq", "Plovdiv");
     cities.add("Sofiq", "Varna");
@@ -144,9 +143,9 @@ TEST_CASE("NON-ORIENTED NON-WEIGHTED GRAPH TESTS")
     CHECK(cities.has_edge("Dupnica", "Burgas") == false);
 
     // CAUSES SEGMENTATION FAULT
-    //cities.remove_edge("Sofiq", "Varna");
-    //cities.print();
+    // cities.remove_edge("Sofiq", "Varna");
+    // cities.print();
 
-    //cities.remove_vertex("Sofiq");
-    //cities.print();
+    // cities.remove_vertex("Sofiq");
+    // cities.print();
 }

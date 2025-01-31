@@ -5,12 +5,13 @@
 
 #include "Vector.h"
 
-template<class T>
-std::vector<T> tovector(Vector<T> vec)
-{
+template <class T>
+std::vector<T> tovector(Vector<T> vec) {
     std::vector<T> res;
-    
-    for (size_t i = 0; i < vec.get_size(); i++) res.push_back(vec[i]);
+
+    for (size_t i = 0; i < vec.get_size(); i++) {
+        res.push_back(vec[i]);
+    }
 
     return res;
 }

@@ -1,14 +1,14 @@
 #include <iostream>
 
+#include "../GEList/GEList.h"
+#include "../GList/GList.h"
 #include "Algorithms.h"
 
-#include "../GList/GList.h"
-#include "../GEList/GEList.h"
-
-void tests(void)
-{
+void tests(void) {
     GList<int, int> g(true, false);
-    for(size_t i = 1; i <= 12; i++) g.add_vertex(i);
+    for (size_t i = 1; i <= 12; i++) {
+        g.add_vertex(i);
+    }
 
 #if 1
     g.add_edge(1, 2);
@@ -26,13 +26,12 @@ void tests(void)
     g.add_edge(10, 11);
     g.add_edge(11, 12);
 #endif
-    
-    //for(int i = 1; i <= 12; i++) { g.BFS(i); BFS(g, i); }
-    //for(int i = 1; i <= 12; i++) { g.DFS(i); DFS(g, i); }
+
+    // for(int i = 1; i <= 12; i++) { g.BFS(i); BFS(g, i); }
+    // for(int i = 1; i <= 12; i++) { g.DFS(i); DFS(g, i); }
 }
 
-int main(void)
-{
+int main(void) {
     tests();
 
     return 0;

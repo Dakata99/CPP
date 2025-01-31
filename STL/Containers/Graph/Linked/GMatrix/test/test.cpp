@@ -1,8 +1,4 @@
-#include "doctest.h"
 #include "GMatrix.hpp"
+#include "doctest.h"
 
-
-TEST_CASE("1")
-{
-
-}
+TEST_CASE("1") {}

@@ -4,8 +4,7 @@
 #include "../../Containers/Graph/Trees/Binary/Linked/inc/BTree.h"
 
 template <class T>
-class Position
-{
+class Position {
 private:
     typedef typename BTree<T>::Node BTNode;
     BTNode*& current;
@@ -16,7 +15,7 @@ public:
     Position left(void) const;
     Position right(void) const;
 
-    const T& operator* (void) const;
+    const T& operator*(void) const;
 
     bool empty(void) const;
 

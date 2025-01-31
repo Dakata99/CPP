@@ -1,11 +1,10 @@
 #include <iostream>
 
-#include "BTree.h"
-#include "../../../../../../Iterators/Trees iterators/Position.h"
 #include "../../../../../../Iterators/Trees iterators/Iterator.h"
+#include "../../../../../../Iterators/Trees iterators/Position.h"
+#include "BTree.h"
 
-void run(void)
-{
+void run(void) {
     BTree<int> t1;
     t1.create();
     t1.print2D();
@@ -28,7 +27,7 @@ void run(void)
 #endif
 
     // BTree<int> t(t1);
-    
+
     // std::cout << *t.root_position() << std::endl;
     // t.root_position().set(10);
     // t.root_position().left().set(20);
@@ -39,8 +38,7 @@ void run(void)
     t1.print2D_v2();
 }
 
-int main(void)
-{
+int main(void) {
     // run();
 
     return 0;

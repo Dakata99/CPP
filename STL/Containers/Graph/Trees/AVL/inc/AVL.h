@@ -1,10 +1,10 @@
 #ifndef _AVL_H_
 #define _AVL_H_
 
-#include <iostream>
 #include <cassert>
-#include <queue>
 #include <cmath>
+#include <iostream>
+#include <queue>
 
 #include "BST/src/BST.hpp"
 
@@ -15,8 +15,7 @@ template <class T>
 class Iterator;
 
 template <class T>
-class AVL : public BST<T>
-{
+class AVL : public BST<T> {
 private:
     friend Position<T>;
     typedef typename BST<T>::Node BTNode;

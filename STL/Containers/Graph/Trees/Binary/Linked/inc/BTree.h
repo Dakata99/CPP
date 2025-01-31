@@ -1,10 +1,10 @@
 #ifndef _BTREE_H_
 #define _BTREE_H_
 
-#include <iostream>
 #include <cassert>
-#include <queue>
 #include <cmath>
+#include <iostream>
+#include <queue>
 
 template <class T>
 class Position;
@@ -13,14 +13,12 @@ template <class T>
 class Iterator;
 
 template <class T>
-class BTree
-{
+class BTree {
 protected:
-    struct Node
-    {
+    struct Node {
         int height;
         T value;
-        Node* left, *right;
+        Node *left, *right;
         Node(Node* = nullptr, const T& = T(), Node* = nullptr);
     };
 
@@ -49,7 +47,7 @@ public:
     BTree(const BTree&);
     ~BTree();
 
-    BTree& operator= (const BTree&);
+    BTree& operator=(const BTree&);
 
     Position<T> root_position(void);
 
